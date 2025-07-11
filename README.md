@@ -54,3 +54,8 @@
 - **Write unit tests for components, services, and other parts of the application.**
 - **Use Angular's testing utilities and frameworks like Jasmine and Karma.**
 - **Ensure that all tests pass and the application behaves as expected.**
+
+**Instructions**: 
+* Set up basic `Angular app with TypeScript` from scratch using `npx -p @angular/cli ng new temp && mv temp/* . && mv temp/.[^.]* . && rm -rf temp` command
+* Have proper `State handling`
+* Have proper `Event Handling` for respective events
