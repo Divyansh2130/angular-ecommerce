@@ -1,4 +1,4 @@
-# Capstone Project Title: TaskFlow – Implement eCommerce Application Using Angular
+# Capstone Project: TaskFlow – Implement eCommerce Application Using Angular
 
 ## Project Description:
 
