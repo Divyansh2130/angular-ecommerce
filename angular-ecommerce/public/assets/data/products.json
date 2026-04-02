@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Gaming Laptop",
+    "description": "High performance laptop",
+    "price": 1200,
+    "rating": 4.5,
+    "image": "https://via.placeholder.com/300",
+    "category": "computers"
+  },
+  {
+    "id": 2,
+    "title": "Smartphone X",
+    "description": "Latest smartphone",
+    "price": 899,
+    "rating": 4.7,
+    "image": "https://via.placeholder.com/300",
+    "category": "smart-phone"
+  },
+  {
+    "id": 3,
+    "title": "Wireless Headphones",
+    "description": "Noise cancelling",
+    "price": 199,
+    "rating": 4.3,
+    "image": "https://via.placeholder.com/300",
+    "category": "headphones"
+  }
+]

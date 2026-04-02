@@ -1,0 +1,60 @@
+<section class="relative w-full md:aspect-1440/798 overflow-hidden flex flex-col ">
+    <!-- Background Image -->
+    <img src="/assets/images/home/lady_listening.jpg" alt="Hero" class="absolute inset-0 w-full h-full  object-cover object-[center_right]" />
+    <!-- Left Gradient Overlay -->
+    <div class="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-transparent"></div>
+ 
+    <!-- navbar -->
+    <div class="md:p-4 mx-[10vw]">
+        <app-navbar></app-navbar>
+    </div>
+
+    <!-- Main content -->
+    <div class="relative top-[8vh] left-[5vh] max-w-7xl px-10 py-14 text-white mt-auto self-end  md:mt-auto md:self-start">
+
+        <h1 class="font-bold leading-tight mt-auto mb-6 text-[clamp(1rem,5vw,4rem)] self-end md:self-start">
+            Introducing the <br/>
+            Next Generation of <br/>
+            Sound
+        </h1>
+
+        <p class="text-[clamp(0.75rem,2vw,1.25rem)] text-gray-200 mb-8 flex-1">
+            Experience pure, immersive sound like never before
+        </p>
+
+        <button class="w-fit ml-auto bg-blue-600 hover:bg-blue-700 transition z-10 text-white text-[clamp(0.875rem,1.2vw,1.125rem)] px-[clamp(1rem,2vw,2rem)] py-[clamp(0.5rem,1vw,0.75rem)] mb-[clamp(1rem,2vw,2rem)] rounded-[clamp(0.5rem,1vw,1rem)]">
+            Discover more
+        </button>
+
+    </div>
+
+
+    <!-- Bottom Category Strip -->
+    <div class=" hidden sm:block relative top-0 bottom-0 left-0 right-0 px-6 py-2 pt-[5vh]">
+
+        <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 items-center">
+
+            <div class="flex flex-wrap justify-evenly gap-10">
+
+                @for (category of categories; track category.name){
+                <div class="flex flex-col items-center justify-around ">
+                    <!-- Display image if available -->
+                    @if(category.image){
+                    <div class="w-8 h-8 mb-2 ">
+                        <img [src]="category.image" [alt]="category.name" class="w-full h-full object-contain object-center grayscale brightness-125" />
+                    </div>
+                    <!-- Display category name -->
+                    <span class="text-gray-700 text-centertext-sm font-medium grayscale brightness-125">{{ category.name }}</span>
+                    }
+                </div>
+
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>

@@ -1,0 +1,10 @@
+<div class="absolute mt-4 w-64 bg-white z-30 shadow-xl rounded-xl p-6">
+  <ul class="space-y-4 text-lg text-gray-700">
+   @for (category of categories; track category.id) {
+  <li
+    class="cursor-pointer hover:text-blue-600 transition">
+    {{ category.name }}
+  </li>
+}
+  </ul>
+</div>
