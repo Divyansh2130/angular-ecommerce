@@ -1,0 +1,33 @@
+<div class="relative">
+  
+  <!-- Scroll Container -->
+  <div 
+    #scrollContainer
+    class="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory"
+    (scroll)="onScroll()">
+
+    <div 
+      *ngFor="let item of items; let i = index"
+      class="shrink-0 snap-start"
+      [ngStyle]="{ 'min-width': cardWidth }">
+
+      <!-- Projected Content -->
+      <ng-container 
+        *ngTemplateOutlet="itemTemplate; context: {$implicit: item}">
+      </ng-container>
+
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div *ngIf="showDots" class="flex justify-center mt-4 gap-2">
+    <span 
+      *ngFor="let item of items; let i = index"
+      class="h-2 w-2 rounded-full cursor-pointer"
+      [class.bg-black]="i === activeIndex"
+      [class.bg-gray-300]="i !== activeIndex"
+      (click)="scrollTo(i)">
+    </span>
+  </div>
+
+</div>

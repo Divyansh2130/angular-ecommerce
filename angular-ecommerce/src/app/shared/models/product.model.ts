@@ -1,9 +1,12 @@
 export interface Product{
-    id:number;
     title:string;
-    description:string;
+    description?:string;
     price:number;
+    originalPrice:number;
     rating:number;
     image:string;
-    category:string;
+    category?:string;
+    discount?:string;
+    tag?:string;
+    reviews?:number;
 }
