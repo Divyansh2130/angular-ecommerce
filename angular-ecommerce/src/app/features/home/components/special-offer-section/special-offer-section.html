@@ -1,12 +1,11 @@
 <div class="px-6 py-4">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">Special offers</h2>
-        <a class="text-blue-500 cursor-pointer">View all →</a>
-    </div>
 
     <!-- Divider -->
-    <div class="border-b mb-6"></div>
+   
+    <app-section-header title="Special offers"></app-section-header>
+
+    <div class="border-b border-gray-300 mb-6"></div>
+    
 
     <!-- Grid -->
     <app-carousel [items]="products" cardWidth="%" [showDots]="true">
@@ -22,7 +21,7 @@
         @for (item of features; track $index) {
         <div class="flex items-center gap-1 ">
             <div>
-                <img [src]="item.icon" class=" h-[clamp(6vh, 6vh, 6vh)] w-[clamp(6vw, 6vw, 6vw)]">
+                <img [src]="item.icon" class=" h-[6vh] ">
             </div>
             <div class="flex flex-col">
                 <p class="font-semibold">{{ item.title }}</p>

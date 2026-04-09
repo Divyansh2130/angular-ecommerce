@@ -1,0 +1,33 @@
+<div class="px-6 py-4">
+
+  <app-section-header title="Shop by category"></app-section-header>
+
+  <!-- Divider -->
+  <div class="border-b border-gray-300 mb-6"></div>
+
+  <!-- Categories -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between gap-6">
+
+    <div 
+      *ngFor="let category of categories"
+      class="min-w-[200px] sm:min-w-[200px] lg:min-w-[200px] 
+             bg-gray-100 rounded-xl border border-gray-300
+             flex flex-col items-center justify-center 
+             p-5 cursor-pointer hover:shadow-md transition">
+
+      <!-- Image -->
+      <img 
+        [src]="category.image" 
+        [alt]="category.name"
+        class="h-[15vh] object-contain mb-4" />
+
+      <!-- Name -->
+      <p class="text-gray-700 font-medium">
+        {{ category.name }}
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

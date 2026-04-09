@@ -1,0 +1,16 @@
+<div class="px-6 py-4">
+    <!-- Header -->
+    <app-section-header title="Best Seller"></app-section-header>
+
+    <!-- Divider -->
+    <div class="border-b border-gray-300 mb-6"></div>
+
+    <!-- Grid -->
+    <app-carousel [items]="products" cardWidth="%" [showDots]="true">
+
+        <ng-template let-product>
+            <app-product-card [product]="product"></app-product-card>
+        </ng-template>
+
+    </app-carousel>
+</div>

@@ -1,11 +1,16 @@
 <div class="min-h-screen bg-gray-50 flex flex-col">
 
 
-  <!-- Page Content -->
-  <main>
-    <div class="max-w-[1440px] mx-auto">
-      <router-outlet></router-outlet>
-    </div>
-  </main>
+    <!-- Page Content -->
+    <main>
+        <div class="mx-auto">
+
+            <app-navbar></app-navbar>
+
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+        </div>
+
+    </main>
 
 </div>
