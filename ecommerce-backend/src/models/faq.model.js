@@ -27,5 +27,7 @@ const faqSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 faqSchema.index({category:1});
+
 export default mongoose.model('FAQ', faqSchema);
