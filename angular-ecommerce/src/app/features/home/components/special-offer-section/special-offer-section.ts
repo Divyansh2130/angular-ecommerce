@@ -4,11 +4,12 @@ import { Product } from '../../../../shared/models/product.model';
 import { ProductCard } from '../../../../shared/components/product-card/product-card';
 import { Carousel } from '../../../../shared/components/carousel/carousel';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
+import { FeatureStrip, FeatureStripItem } from '../../../../shared/components/feature-strip/feature-strip';
 
 @Component({
   selector: 'app-special-offer-section',
   standalone: true,
-  imports: [ProductCard, CommonModule, Carousel, SectionHeader],
+  imports: [ProductCard, CommonModule, Carousel, SectionHeader, FeatureStrip],
   templateUrl: './special-offer-section.html',
   styleUrl: './special-offer-section.css'
 })
@@ -52,7 +53,7 @@ export class SpecialOfferSectionComponent {
       reviews: 120
     }
   ];
-    features = [
+    features: FeatureStripItem[] = [
   {
     icon: "/assets/images/home/features/truck.png",
     title: "Free shipping",

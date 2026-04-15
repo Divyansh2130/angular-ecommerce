@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { BlogInterface } from '../../../../shared/models/blog.model';
-import { SectionHeader } from '../../../../shared/components/section-header/section-header';
-import { CommonModule } from '@angular/common';
+import { BlogSection } from '../../../../shared/components/blog-section/blog-section';
 @Component({
   selector: 'app-blog',
-  imports: [SectionHeader,CommonModule],
+  imports: [BlogSection],
   templateUrl: './blog.html',
   styleUrl: './blog.css',
 })
 export class Blog {
+
+  //Hardcoded blogs data for demonstration purposes, wiil replace with fetch api
   blogs: BlogInterface[] = [
   {
     title: "Travel light, travel smart!",

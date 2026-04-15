@@ -1,51 +1,5 @@
-<div class="px-6 py-6">
-
-  <!-- Header -->
-  <app-section-header title="Tech tips and guides blog"></app-section-header>
-
-    <div class="border-b border-gray-300 mb-6"></div>
-
-  <!-- Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-    <div *ngFor="let blog of blogs" class="space-y-4">
-
-      <!-- Top Banner -->
-      <div class="relative rounded-xl overflow-hidden h-[180px]">
-
-        <!-- Background Image -->
-        <img 
-          [src]="blog.image" 
-          class="w-full h-full object-cover" />
-
-        <!-- Blue Overlay Shape -->
-        <div class="absolute inset-0 bg-blue-900/30"></div>
-
-        <!-- Decorative Circle -->
-        <div class="absolute -left-30 -bottom-10  w-84 h-84 bg-blue-800 rounded-full"></div>
-
-        <!-- Content -->
-        <div class="absolute inset-0 flex items-center px-6 text-white">
-
-          <h3 class="text-lg font-semibold leading-snug">
-            {{ blog.title }}
-          </h3>
-
-        </div>
-      </div>
-
-      <!-- Bottom Content -->
-      <div>
-        <h4 class="font-semibold text-gray-800">
-          {{ blog.footerTitle }}
-        </h4>
-        <p class="text-sm text-gray-500 mt-1">
-          {{ blog.footerDesc }}
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
+<app-blog-section
+  title="Tech tips and guides blog"
+  [blogs]="blogs"
+  wrapperClass="px-6 py-6">
+</app-blog-section>

@@ -10,6 +10,10 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./features/home/home').then((m) => m.Home),
       },
+      {
+        path:'category/:name',
+        loadComponent:()=>import('./features/category/category').then((m)=>m.Category),
+      }
     ],
   },
 ];

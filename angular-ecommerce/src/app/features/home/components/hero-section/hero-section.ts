@@ -17,9 +17,9 @@ export class HeroSection implements OnInit, OnDestroy {
 
   heroImages: string[] = [
     '/assets/images/home/lady_listening_2.png',
+    '/assets/images/home/lady.png'
   ];
   currentHeroIndex = 0;
-  private heroRotationTimer:any;
 
   get currentHeroImage(): string {
     console.log('Get called:', this.currentHeroIndex);

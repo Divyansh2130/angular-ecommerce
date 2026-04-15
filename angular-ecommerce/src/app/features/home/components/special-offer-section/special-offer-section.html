@@ -17,17 +17,5 @@
     </app-carousel>
     
     <!-- special feature -->
-    <div class="hidden lg:flex justify-evenly py-20 gap-[3vw]">
-        @for (item of features; track $index) {
-        <div class="flex items-center gap-1 ">
-            <div>
-                <img [src]="item.icon" class=" h-[6vh] ">
-            </div>
-            <div class="flex flex-col">
-                <p class="font-semibold">{{ item.title }}</p>
-                <p class="text-sm text-gray-500">{{ item.description }}</p>
-            </div>
-        </div>
-        }
-    </div>
+    <app-feature-strip [items]="features"></app-feature-strip>
 </div>

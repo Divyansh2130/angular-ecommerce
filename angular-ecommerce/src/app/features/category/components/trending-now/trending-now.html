@@ -1,0 +1,11 @@
+<div class="px-2 py-2 md:px-0">
+  <app-section-header title="Trending Now"></app-section-header>
+
+  <div class="border-b border-gray-300 mb-6"></div>
+
+  <app-carousel [items]="products" cardWidth="%" [showDots]="true">
+    <ng-template let-product>
+      <app-product-card [product]="product"></app-product-card>
+    </ng-template>
+  </app-carousel>
+</div>

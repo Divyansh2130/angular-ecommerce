@@ -1,0 +1,15 @@
+<div class="px-6 py-4">
+
+    <app-section-header title="Top brands"></app-section-header>
+    
+    <div class="hidden lg:flex justify-evenly py-15 gap-[3vw]">
+        @for (item of features; track $index) {
+        <div class="flex items-center gap-1">
+            <div>
+                <img [src]="item.icon" class="h-10 w-auto object-contain">
+            </div>
+
+        </div>
+        }
+    </div>
+</div>

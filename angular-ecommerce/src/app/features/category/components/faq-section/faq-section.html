@@ -1,0 +1,58 @@
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+  <!-- LEFT: FAQ -->
+  <div class="lg:col-span-2 space-y-4">
+
+    <h2 class="text-xl font-semibold text-gray-800">
+      Frequently Asked Questions About {{ category | titlecase}}
+    </h2>
+
+    @for (faq of faqs; track faq.question; let i = $index) {
+    <div class="border-b  border-gray-400 text-2xl pb-1">
+
+      <!-- Question -->
+      <div
+        class="flex justify-between items-center cursor-pointer py-3"
+        (click)="toggleFAQ(i)"
+      >
+        <p class="text-lg font-medium text-gray-700">
+          {{ faq.question }}
+        </p>
+
+        <span class="text-gray-500">
+          {{ faq.isOpen ? '−' : '+' }}
+        </span>
+      </div>
+
+      <!-- Answer -->
+      @if (faq.isOpen) {
+      <div class="text-sm text-gray-500 pb-2">
+        {{ faq.answer }}
+      </div>
+      }
+
+    </div>
+    }
+
+  </div>
+
+  <!-- RIGHT: CTA -->
+  <div class="bg-blue-50 rounded-xl p-6 flex flex-col justify-between shadow-sm py-[10vh]">
+
+    <div class="space-y-1">
+      <h3 class="text-lg font-semibold text-blue-700">
+        Got questions? We've got answers!
+      </h3>
+
+      <p class="text-sm text-gray-600">
+        Chat with our tech expert for personalized advice and make informed decisions.
+      </p>
+    </div>
+
+    <button class="mt-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+      Get help now
+    </button>
+
+  </div>
+
+</div>
