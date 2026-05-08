@@ -1,28 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
+import { MockContentService } from '../../../../core/services/mock-content.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-top-brands',
   imports: [SectionHeader],
   templateUrl: './top-brands.html',
   styleUrl: './top-brands.css',
 })
-export class TopBrands {
-  features = [
-  {
-    icon: "/assets/images/home/top-brands/samsung.png",
-  },
-  {
-    icon: "/assets/images/home/top-brands/lg.png",
-  },
-  {
-    icon: "/assets/images/home/top-brands/microsoft.png",
-  },
-  {
-    icon: "/assets/images/home/top-brands/sony.png",
-  },
-  {
-    icon: "/assets/images/home/top-brands/apple.png",
-  }
-];
+export class TopBrands implements OnInit, OnDestroy {
+  private contentService = inject(MockContentService);
+  private contentSub?: Subscription;
 
+  features: { icon: string }[] = [];
+
+  ngOnInit() {
+    this.contentSub = this.contentService.content$.subscribe((content) => {
+      this.features = (content.topBrands || []).map((item) => ({ icon: item.icon }));
+    });
+  }
+
+  ngOnDestroy() {
+    this.contentSub?.unsubscribe();
+  }
 }

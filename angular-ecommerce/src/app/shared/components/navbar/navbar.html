@@ -1,82 +1,171 @@
-<nav #navbarRoot class="absolute top-[2vh] left-0 mt-2 mx-[2vw] w-[calc(100%-4vw)] bg-[rgba(255,255,255,.7)]  backdrop-blur-md shadow-sm rounded-xl px-4 py-1 sm:px-6 z-90 overflow-visible">
-    <div class="flex  items-center justify-between md:justify-evenly">
-
-        <!--left  Logo -->
+<!-- ===================== HOME VARIANT (floating/glassmorphism) ===================== -->
+@if (variant === 'home') {
+<nav #navbarRoot class="absolute top-[2vh] left-0 mt-2 mx-[2vw] w-[calc(100%-4vw)] bg-[rgba(255,255,255,.7)] backdrop-blur-md shadow-sm rounded-xl px-4 py-1 sm:px-6 z-90 overflow-visible">
+    <div class="flex items-center justify-between md:justify-evenly">
+        <!-- Logo -->
         <div class="relative text-2xl font-bold text-blue-600 w-auto">
-            <img src="/assets/images/navbar/logo.png" alt="logo" class=" h-4 sm:h-5" />
+            <img src="/assets/images/navbar/logo.png" alt="logo" class="h-4 sm:h-5" />
         </div>
-
-        <!-- All Products + Search -->
-        <div class="hidden md:flex items-center flex-1 mx-10  relative w-full mt-2 md:mt-0 md:w-auto">
-
-            <!-- All Products -->
-            <div class="relative ">
+        <!-- All Products + Search (desktop) -->
+        <div class="hidden md:flex items-center flex-1 mx-10 relative w-full mt-2 md:mt-0 md:w-auto">
+            <div class="relative">
                 <button (click)="toggleCategory()" class="flex items-center gap-2 bg-[rgba(255,255,255,.4)] px-4 py-2 rounded-l-lg hover:bg-gray-200 transition">
-                    <img src="/assets/images/navbar/burger.png" alt="burger" class="h-5" /> <span class="hidden md:block whitespace-nowrap">All products</span>
+                    <img src="/assets/images/navbar/burger.png" alt="burger" class="h-5" />
+                    <span class="hidden md:block whitespace-nowrap">All products</span>
                 </button>
                 @if(isCategoryOpen()){
                 <app-category-panel [categories]="categories()"></app-category-panel>
                 }
             </div>
-
-
-            <!-- Search -->
-            <div class="flex-1 relative ">
+            <div class="flex-1 relative">
                 <div class="flex justify-end items-center bg-[rgba(255,255,255,.4)] rounded-r-lg">
                     <input type="text" placeholder="I'm searching for..." (focus)="openSearch()" class="w-full rounded-xl px-5 py-2 outline-none" />
-                    <img src="/assets/images/navbar/search.png" alt="burger" class="h-4 mr-4" />
+                    <img src="/assets/images/navbar/search.png" alt="search" class="h-4 mr-4" />
                 </div>
-
                 @if (isSearchOpen()) {
                 <app-search-panel></app-search-panel>
                 }
             </div>
-
         </div>
-
         <!-- Right Icons -->
-        <div class="relative flex items-center gap-1 sm:gap-2 xl:gap-5 lg:gap-3 text-gray-600 transition duration-300 hover:brightness-75 ml-auto md:ml-0">
-
-            <span class="hidden md:flex text-lg sm:text-xl text-gray-600  gap-1"><img src="/assets/images/navbar/launguage.png" alt="launguage" class="h-5 sm:h-6 md:h-7" />EN<img src="/assets/images/navbar/drop-down.png" alt="drop-down" class="mt-1 h-4 sm:h-5 md:h-6" /></span>
-            <span><img src="/assets/images/navbar/wishlist.png" alt="wishlist" class="h-8 sm:h-9 md:h-10 lg:h-11 mb-1 transition duration-300 hover:brightness-75" /></span>
-            <span><img src="/assets/images/navbar/profile.png" alt="profile" class="h-8 sm:h-9 md:h-10 lg:h-11" /></span>
-            <span><img src="/assets/images/navbar/cart.png" alt="cart" class="h-8 sm:h-9 md:h-10 lg:h-11" /></span>
+        <div class="relative flex items-center gap-1 sm:gap-2 xl:gap-5 lg:gap-3 text-gray-600 ml-auto md:ml-0">
+            <span class="hidden md:flex text-lg sm:text-xl text-gray-600 gap-1">
+                <img src="/assets/images/navbar/launguage.png" alt="language" class="h-5 sm:h-6 md:h-7" />EN
+                <img src="/assets/images/navbar/drop-down.png" alt="drop-down" class="mt-1 h-4 sm:h-5 md:h-6" />
+            </span>
+            <a routerLink="/wishlist" class="relative inline-flex">
+                <img src="/assets/images/navbar/wishlist.png" alt="wishlist" class="h-8 sm:h-9 md:h-10 lg:h-11 mb-1 transition duration-300 hover:brightness-75" />
+                @if (wishlistItemCount() > 0) {
+                <span class="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-blue-600 text-white text-[10px] font-semibold flex items-center justify-center">
+                    {{ wishlistItemCount() }}
+                </span>
+                }
+            </a>
+            <a routerLink="/auth/login" class="inline-flex">
+                <img src="/assets/images/navbar/profile.png" alt="profile" class="h-8 sm:h-9 md:h-10 lg:h-11" />
+            </a>
+            <a routerLink="/cart" class="relative inline-flex">
+                <img src="/assets/images/navbar/cart.png" alt="cart" class="h-8 sm:h-9 md:h-10 lg:h-11" />
+                @if (cartItemCount() > 0) {
+                <span class="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-blue-600 text-white text-[10px] font-semibold flex items-center justify-center">
+                    {{ cartItemCount() }}
+                </span>
+                }
+            </a>
         </div>
-
     </div>
-
-    <!-- All Products + Search -->
-    <div class="flex  md:hidden items-center flex-1 relative w-full mt-1 sm:mt-2 ">
-
-        <!-- All Products -->
+    <!-- Mobile search row -->
+    <div class="flex md:hidden items-center flex-1 relative w-full mt-1 sm:mt-2">
         <div class="relative bg-[rgba(255,255,255,.7)]">
             <button (click)="toggleCategory()" class="flex items-center gap-1 sm:gap-2 px-3 py-1 sm:px-4 sm:py-2 rounded-l-lg hover:bg-gray-200 transition">
-                <img src="/assets/images/navbar/burger.png" alt="burger" class="h-4 sm:h-5" /> <span class="hidden md:block whitespace-nowrap">All products</span>
+                <img src="/assets/images/navbar/burger.png" alt="burger" class="h-4 sm:h-5" />
             </button>
             @if(isCategoryOpen()){
             <app-category-panel [categories]="categories()"></app-category-panel>
             }
         </div>
-
-
-        <!-- Search -->
-        <div class="flex-1 relative ">
+        <div class="flex-1 relative">
             <div class="flex justify-end bg-[rgba(255,255,255,.4)] items-center rounded-r-lg">
                 <input type="text" placeholder="I'm searching for..." (focus)="openSearch()" class="w-full rounded-xl bg-[rgba(255,255,255,.4)] px-3 py-1 sm:px-5 sm:py-2 outline-none text-sm sm:text-base" />
-                <img src="/assets/images/navbar/search.png" alt="burger" class="h-3 sm:h-4 mr-3 sm:mr-4" />
+                <img src="/assets/images/navbar/search.png" alt="search" class="h-3 sm:h-4 mr-3 sm:mr-4" />
             </div>
-
             @if (isSearchOpen()) {
             <app-search-panel></app-search-panel>
             }
         </div>
-
     </div>
-
-    <!-- Panels -->
-
-
-
-
 </nav>
+}
+
+<!-- ===================== PAGE VARIANT (solid sticky) ===================== -->
+@if (variant === 'page') {
+<header #navbarRoot class="sticky top-0 z-50 bg-white shadow-sm">
+    <!-- Top bar -->
+    <div class="flex items-center justify-between px-4 sm:px-8 py-3 gap-4">
+        <!-- Logo -->
+        <a routerLink="/" class="shrink-0">
+            <img src="/assets/images/navbar/logo.png" alt="logo" class="h-5" />
+        </a>
+        <!-- All Products + Search (desktop) -->
+        <div class="hidden md:flex flex-1 items-center max-w-2xl mx-4">
+            <div class="relative shrink-0">
+                <button (click)="toggleCategory()" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-l-lg transition border border-gray-200 border-r-0">
+                    <img src="/assets/images/navbar/burger.png" alt="burger" class="h-4" />
+                    <span class="whitespace-nowrap text-sm font-medium text-gray-700">All products</span>
+                </button>
+                @if(isCategoryOpen()){
+                <app-category-panel [categories]="categories()"></app-category-panel>
+                }
+            </div>
+            <div class="flex-1 relative">
+                <div class="flex items-center bg-gray-100 rounded-r-lg border border-gray-200 border-l-0">
+                    <input type="text" placeholder="I'm searching for..." (focus)="openSearch()"
+                        class="w-full bg-transparent px-4 py-2 outline-none text-sm text-gray-700" />
+                    <img src="/assets/images/navbar/search.png" alt="search" class="h-4 mr-3 shrink-0 opacity-50" />
+                </div>
+                @if (isSearchOpen()) {
+                <app-search-panel></app-search-panel>
+                }
+            </div>
+        </div>
+        <!-- Right Icons -->
+        <div class="flex items-center gap-2 sm:gap-3 lg:gap-5 ml-auto md:ml-0">
+            <span class="hidden lg:flex items-center text-sm text-gray-600 gap-1 cursor-pointer hover:text-blue-600 transition">
+                <img src="/assets/images/navbar/launguage.png" alt="language" class="h-5" />EN
+                <img src="/assets/images/navbar/drop-down.png" alt="drop-down" class="h-4" />
+            </span>
+            <a routerLink="/wishlist" class="relative p-1 hover:opacity-75 transition inline-flex">
+                <img src="/assets/images/navbar/wishlist.png" alt="wishlist" class="h-8 sm:h-9" />
+                @if (wishlistItemCount() > 0) {
+                <span class="absolute top-0 right-0 min-w-5 h-5 px-1 rounded-full bg-blue-600 text-white text-[10px] font-semibold flex items-center justify-center">
+                    {{ wishlistItemCount() }}
+                </span>
+                }
+            </a>
+            <a routerLink="/auth/login" class="relative p-1 hover:opacity-75 transition inline-flex">
+                <img src="/assets/images/navbar/profile.png" alt="profile" class="h-8 sm:h-9" />
+            </a>
+            <a routerLink="/cart" class="relative p-1 hover:opacity-75 transition inline-flex">
+                <img src="/assets/images/navbar/cart.png" alt="cart" class="h-8 sm:h-9" />
+                @if (cartItemCount() > 0) {
+                <span class="absolute top-0 right-0 min-w-5 h-5 px-1 rounded-full bg-blue-600 text-white text-[10px] font-semibold flex items-center justify-center">
+                    {{ cartItemCount() }}
+                </span>
+                }
+            </a>
+        </div>
+    </div>
+    <!-- Category strip -->
+    <div class="hidden md:flex items-center px-4 lg:px-12 pt-3 pb-2 border-t border-gray-100 gap-3 lg:gap-0 overflow-x-auto">
+        @for (cat of categories(); track cat.id) {
+        <a [routerLink]="['/category', cat.slug]"
+            class="shrink-0 lg:flex-1 lg:text-center text-sm text-gray-600 whitespace-nowrap hover:text-blue-600 transition font-medium px-2">
+            {{ cat.name }}
+        </a>
+        }
+        <a routerLink="/deals" class="shrink-0 lg:flex-1 lg:text-center text-sm text-gray-600 whitespace-nowrap hover:text-blue-600 transition font-medium px-2">Deals</a>
+    </div>
+    <!-- Mobile search row -->
+    <div class="flex md:hidden items-center px-4 pb-2 gap-2">
+        <div class="relative shrink-0">
+            <button (click)="toggleCategory()" class="flex items-center gap-1 bg-gray-100 px-3 py-1.5 rounded-l-lg border border-gray-200 border-r-0">
+                <img src="/assets/images/navbar/burger.png" alt="burger" class="h-4" />
+            </button>
+            @if(isCategoryOpen()){
+            <app-category-panel [categories]="categories()"></app-category-panel>
+            }
+        </div>
+        <div class="flex-1 relative">
+            <div class="flex items-center bg-gray-100 rounded-r-lg border border-gray-200 border-l-0">
+                <input type="text" placeholder="I'm searching for..." (focus)="openSearch()"
+                    class="w-full bg-transparent px-3 py-1.5 outline-none text-sm" />
+                <img src="/assets/images/navbar/search.png" alt="search" class="h-4 mr-3 opacity-50 shrink-0" />
+            </div>
+            @if (isSearchOpen()) {
+            <app-search-panel></app-search-panel>
+            }
+        </div>
+    </div>
+</header>
+}
 

@@ -1,29 +1,569 @@
 [
   {
     "id": 1,
-    "title": "Gaming Laptop",
-    "description": "High performance laptop",
-    "price": 1200,
-    "rating": 4.5,
-    "image": "https://via.placeholder.com/300",
-    "category": "computers"
+    "slug": "hp-laptop-intel-core-i7",
+    "title": "HP Laptop with Intel Core i7",
+    "subtitle": "14 inch FHD, Intel Core i7, 16GB RAM, 512GB SSD",
+    "description": "A balanced premium laptop for work, study, and travel.",
+    "longDescription": "With the Intel Core i7 processor and 16GB of memory, this HP laptop handles productivity, streaming, light editing, and day-to-day multitasking smoothly. The fast SSD keeps load times short, while the slim profile makes it easy to carry between home and office.",
+    "image": "/assets/images/category_page/type-section/windows.png",
+    "gallery": [
+      "/assets/images/product/gallery/laptop_1.png",
+      "/assets/images/product/gallery/laptop_2.png",
+      "/assets/images/product/gallery/laptop_3.png",
+      "/assets/images/product/gallery/laptop_4.png",
+      "/assets/images/product/gallery/laptop_5.png"
+    ],
+    "colors": [
+      "#111111",
+      "#cbd5e1",
+      "#f1f5f9",
+      "#0f1b4c"
+    ],
+    "price": 1104,
+    "originalPrice": 1299,
+    "rating": 4.53,
+    "reviews": 436,
+    "brand": "HP",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "16GB",
+    "os": "Windows 11",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "15%",
+    "tag": "Today Only",
+    "sectionTags": [
+      "special-offer",
+      "laptop-deals",
+      "listing"
+    ],
+    "featureBullets": [
+      "Intel Core i7 processor with 16GB RAM for fast multitasking.",
+      "512GB SSD gives you quick boot times and space for daily files.",
+      "HP fast charge support gets you back to work faster.",
+      "Lightweight design makes it easier to carry all day."
+    ],
+    "specs": [
+      {
+        "label": "Display",
+        "value": "15.6 inch Full HD (1920 x 1080)"
+      },
+      {
+        "label": "Processor",
+        "value": "Intel Core i7 (13th Gen)"
+      },
+      {
+        "label": "Internal working memory (RAM)",
+        "value": "16 GB"
+      },
+      {
+        "label": "Total storage capacity",
+        "value": "512 GB SSD"
+      },
+      {
+        "label": "Video card chipset",
+        "value": "AMD Radeon Graphics"
+      },
+      {
+        "label": "Connectivity",
+        "value": "Wi-Fi 6, Bluetooth 5.1, USB-C"
+      }
+    ],
+    "ratingBreakdown": {
+      "averageRating": 4.53,
+      "star5Percentage": 75,
+      "star4Percentage": 30,
+      "star3Percentage": 22,
+      "star2Percentage": 11,
+      "star1Percentage": 12
+    },
+    "ratingsAndReviews": [
+      {
+        "ratings": 4.2,
+        "username": "Nancy Bell",
+        "timestamp": "12 days ago",
+        "review": "Amazing performance. Fast enough for daily work and editing, and the build quality feels premium.",
+        "likes": 12
+      },
+      {
+        "ratings": 3.87,
+        "username": "Mark Tony",
+        "timestamp": "8 days ago",
+        "review": "A practical laptop for everyday use. Battery life is decent and it is comfortable to carry around.",
+        "likes": 16
+      }
+    ]
   },
   {
     "id": 2,
-    "title": "Smartphone X",
-    "description": "Latest smartphone",
-    "price": 899,
-    "rating": 4.7,
-    "image": "https://via.placeholder.com/300",
-    "category": "smart-phone"
+    "slug": "dell-xps-13",
+    "title": "Dell XPS 13",
+    "subtitle": "13.4 inch, Intel Core i7, 16GB RAM, 512GB SSD",
+    "description": "Compact premium ultrabook with edge-to-edge display.",
+    "image": "/assets/images/category_page/type-section/all.png",
+    "price": 699,
+    "originalPrice": 799,
+    "rating": 4.8,
+    "reviews": 282,
+    "brand": "Dell",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "16GB",
+    "os": "Windows 11",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "12%",
+    "sectionTags": [
+      "listing",
+      "similar"
+    ]
   },
   {
     "id": 3,
-    "title": "Wireless Headphones",
-    "description": "Noise cancelling",
-    "price": 199,
+    "slug": "lenovo-ideapad-5",
+    "title": "Lenovo IdeaPad 5",
+    "subtitle": "15.6 inch Full HD, Ryzen 7, 16GB RAM, 512GB SSD",
+    "description": "Reliable all-rounder for home office and everyday study.",
+    "image": "/assets/images/category_page/type-section/deals.png",
+    "price": 899,
+    "originalPrice": 1099,
     "rating": 4.3,
-    "image": "https://via.placeholder.com/300",
-    "category": "headphones"
+    "reviews": 436,
+    "brand": "Lenovo",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "16GB",
+    "os": "Windows 11",
+    "fastShipping": false,
+    "inStock": true,
+    "discount": "18%",
+    "sectionTags": [
+      "listing",
+      "similar"
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "acer-swift-3",
+    "title": "Acer Swift 3",
+    "subtitle": "15.6 inch, Intel Core i5, 8GB RAM, 512GB SSD",
+    "description": "Slim and affordable laptop with strong everyday value.",
+    "image": "/assets/images/category_page/type-section/chromebook.png",
+    "price": 629,
+    "originalPrice": 899,
+    "rating": 4.6,
+    "reviews": 406,
+    "brand": "Acer",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "8GB",
+    "os": "Windows 10",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "30%",
+    "sectionTags": [
+      "listing",
+      "similar"
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "apple-macbook-air-13",
+    "title": "Apple MacBook Air 13",
+    "subtitle": "13 inch Retina, Apple M2, 8GB RAM, 256GB SSD",
+    "description": "Thin, silent, and efficient Apple laptop for work and travel.",
+    "image": "/assets/images/category_page/type-section/macbook.png",
+    "price": 1099,
+    "originalPrice": 1299,
+    "rating": 4.9,
+    "reviews": 520,
+    "brand": "Apple",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "8GB",
+    "os": "macOS",
+    "fastShipping": false,
+    "inStock": true,
+    "discount": "15%",
+    "sectionTags": [
+      "listing",
+      "laptop-deals"
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "asus-rog-zephyrus",
+    "title": "ASUS ROG Zephyrus",
+    "subtitle": "15.6 inch, Ryzen 9, 32GB RAM, 1TB SSD",
+    "description": "High-end gaming laptop with premium cooling and graphics.",
+    "image": "/assets/images/category_page/type-section/gaming.png",
+    "price": 1499,
+    "originalPrice": 1799,
+    "rating": 4.5,
+    "reviews": 210,
+    "brand": "ASUS",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "32GB",
+    "os": "Windows 11",
+    "fastShipping": true,
+    "inStock": false,
+    "discount": "17%",
+    "sectionTags": [
+      "listing",
+      "laptop-deals"
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "lenovo-thinkpad-e14",
+    "title": "Lenovo ThinkPad E14",
+    "subtitle": "14 inch FHD, Intel Core i5, 8GB RAM, 256GB SSD",
+    "description": "Durable business laptop with classic ThinkPad ergonomics.",
+    "image": "/assets/images/category_page/type-section/windows.png",
+    "price": 749,
+    "originalPrice": 899,
+    "rating": 4.4,
+    "reviews": 194,
+    "brand": "Lenovo",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "8GB",
+    "os": "Linux",
+    "fastShipping": false,
+    "inStock": true,
+    "discount": "16%",
+    "sectionTags": [
+      "listing"
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "hp-pavilion-15",
+    "title": "HP Pavilion 15",
+    "subtitle": "15.6 inch FHD, Ryzen 5, 16GB RAM, 512GB SSD",
+    "description": "Versatile mid-range laptop for home and hybrid work.",
+    "image": "/assets/images/category_page/type-section/all.png",
+    "price": 799,
+    "originalPrice": 999,
+    "rating": 4.2,
+    "reviews": 342,
+    "brand": "HP",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "16GB",
+    "os": "Windows 11",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "20%",
+    "sectionTags": [
+      "listing",
+      "similar"
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "iphone-16-pro-max",
+    "title": "Apple iPhone 16 Pro Max",
+    "subtitle": "256GB, Natural Titanium",
+    "description": "Flagship iPhone with premium camera and titanium body.",
+    "image": "/assets/images/home/iphone.png",
+    "price": 1399,
+    "originalPrice": 1749,
+    "rating": 4.6,
+    "reviews": 636,
+    "brand": "Apple",
+    "category": "Smart Phones",
+    "categorySlug": "smart-phone",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "20%",
+    "tag": "Hot",
+    "sectionTags": [
+      "special-offer",
+      "trending",
+      "best-seller"
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "iphone-15-128gb",
+    "title": "Apple iPhone 15 128GB",
+    "subtitle": "A16 chip, OLED display",
+    "description": "Popular iPhone model with strong battery life and camera.",
+    "image": "assets/images/home/best_seller/iPhone.png",
+    "price": 999,
+    "originalPrice": 999,
+    "rating": 4.53,
+    "reviews": 721,
+    "brand": "Apple",
+    "category": "Smart Phones",
+    "categorySlug": "smart-phone",
+    "fastShipping": true,
+    "inStock": true,
+    "tag": "Best Seller",
+    "sectionTags": [
+      "best-seller"
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "samsung-galaxy-s24",
+    "title": "Samsung Galaxy S24",
+    "subtitle": "6.2 inch AMOLED, 256GB, 5G",
+    "description": "Compact Android flagship with bright display and AI features.",
+    "image": "/assets/images/home/promo/samsung.jpg",
+    "price": 879,
+    "originalPrice": 999,
+    "rating": 4.7,
+    "reviews": 540,
+    "brand": "Samsung",
+    "category": "Smart Phones",
+    "categorySlug": "smart-phone",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "12%",
+    "sectionTags": [
+      "listing"
+    ]
+  },
+  {
+    "id": 12,
+    "slug": "apple-airpods-3rd-generation",
+    "title": "Apple AirPods (3rd generation)",
+    "subtitle": "Spatial audio, Lightning charging case",
+    "description": "Lightweight Apple earbuds with balanced sound and comfort.",
+    "image": "/assets/images/home/airpods.png",
+    "price": 197,
+    "originalPrice": 219,
+    "rating": 4.33,
+    "reviews": 235,
+    "brand": "Apple",
+    "category": "Headphones",
+    "categorySlug": "headphones",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "10%",
+    "sectionTags": [
+      "special-offer",
+      "trending"
+    ]
+  },
+  {
+    "id": 13,
+    "slug": "sony-wh-1000xm5-black",
+    "title": "Sony WH-1000XM5 Black",
+    "subtitle": "Wireless noise-cancelling headphones",
+    "description": "Premium over-ear headphones with strong ANC and battery life.",
+    "image": "/assets/images/home/best_seller/heaphones.png",
+    "price": 399,
+    "originalPrice": 499,
+    "rating": 4.5,
+    "reviews": 411,
+    "brand": "Sony",
+    "category": "Headphones",
+    "categorySlug": "headphones",
+    "fastShipping": false,
+    "inStock": true,
+    "discount": "20%",
+    "tag": "Best Seller",
+    "sectionTags": [
+      "trending",
+      "best-seller"
+    ]
+  },
+  {
+    "id": 14,
+    "slug": "meta-quest-3s-256gb",
+    "title": "Meta Quest 3S 256GB",
+    "subtitle": "Standalone mixed reality headset",
+    "description": "Immersive entertainment and gaming headset with large storage.",
+    "image": "/assets/images/home/metaQuest.png",
+    "price": 479,
+    "originalPrice": 599,
+    "rating": 4.8,
+    "reviews": 120,
+    "brand": "Meta",
+    "category": "Gaming",
+    "categorySlug": "gaming",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "20%",
+    "sectionTags": [
+      "special-offer",
+      "trending"
+    ]
+  },
+  {
+    "id": 15,
+    "slug": "philips-airfryer-xl",
+    "title": "Phillips Airfryer XL",
+    "subtitle": "High performance air fryer for healthier cooking",
+    "description": "Large-capacity air fryer with preset cooking modes.",
+    "image": "assets/images/home/best_seller/airfryer.png",
+    "price": 98,
+    "originalPrice": 140,
+    "rating": 4.89,
+    "reviews": 426,
+    "brand": "Philips",
+    "category": "Kitchen",
+    "categorySlug": "kitchen",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "30%",
+    "tag": "Best Seller",
+    "sectionTags": [
+      "best-seller"
+    ]
+  },
+  {
+    "id": 16,
+    "slug": "xiaomi-redmi-watch-4",
+    "title": "Xiaomi Redmi Watch 4 Reim Milanese",
+    "subtitle": "Smart watch with sleek design and health tracking",
+    "description": "Affordable wearable with long battery life and clean design.",
+    "image": "assets/images/home/best_seller/smartwatch.png",
+    "price": 99,
+    "originalPrice": 99,
+    "rating": 4.23,
+    "reviews": 749,
+    "brand": "Xiaomi",
+    "category": "Smart Watches",
+    "categorySlug": "smart-watch",
+    "fastShipping": true,
+    "inStock": true,
+    "tag": "Best Seller",
+    "sectionTags": [
+      "best-seller"
+    ]
+  },
+  {
+    "id": 17,
+    "slug": "apple-macbook-pro-14",
+    "title": "Apple MacBook Pro 14-inch",
+    "subtitle": "Professional laptop with Apple silicon performance",
+    "description": "High-performance laptop for creators and advanced users.",
+    "image": "/assets/images/home/promo/macbookPro.jpg",
+    "price": 1799,
+    "originalPrice": 2099,
+    "rating": 4.8,
+    "reviews": 312,
+    "brand": "Apple",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "16GB",
+    "os": "macOS",
+    "fastShipping": false,
+    "inStock": true,
+    "discount": "14%",
+    "tag": "Top Pick",
+    "sectionTags": [
+      "laptop-deals"
+    ]
+  },
+  {
+    "id": 18,
+    "slug": "everyday-chromebook",
+    "title": "Everyday Chromebook",
+    "subtitle": "Simple lightweight laptop for browsing and school use",
+    "description": "Budget-friendly Chromebook for web and classroom tasks.",
+    "image": "/assets/images/category_page/type-section/chromebook.png",
+    "price": 399,
+    "originalPrice": 499,
+    "rating": 4.2,
+    "reviews": 96,
+    "brand": "Acer",
+    "category": "Laptops",
+    "categorySlug": "laptop",
+    "ram": "8GB",
+    "os": "Windows 10",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "20%",
+    "sectionTags": [
+      "laptop-deals"
+    ]
+  },
+  {
+    "id": 19,
+    "slug": "rechargeable-silent-mouse",
+    "title": "HP 710 Rechargeable Silent Mouse",
+    "subtitle": "Graphite wireless accessory",
+    "description": "Quiet mouse built for daily productivity.",
+    "image": "/assets/images/home/best_seller/heaphones.png",
+    "price": 90,
+    "originalPrice": 90,
+    "rating": 4.72,
+    "reviews": 236,
+    "brand": "HP",
+    "category": "Accessories",
+    "categorySlug": "accessories",
+    "fastShipping": true,
+    "inStock": true,
+    "sectionTags": [
+      "accessory"
+    ]
+  },
+  {
+    "id": 20,
+    "slug": "laptop-sleeve",
+    "title": "BlueBuilt Laptop Sleeve 15-16 inch",
+    "subtitle": "Protective carry sleeve",
+    "description": "Minimal padded sleeve for daily commuting.",
+    "image": "/assets/images/category_page/type-section/all.png",
+    "price": 37.99,
+    "originalPrice": 37.99,
+    "rating": 4.25,
+    "reviews": 96,
+    "brand": "BlueBuilt",
+    "category": "Accessories",
+    "categorySlug": "accessories",
+    "fastShipping": true,
+    "inStock": true,
+    "sectionTags": [
+      "accessory"
+    ]
+  },
+  {
+    "id": 21,
+    "slug": "cooling-pad",
+    "title": "Double Adjustable Laptop Cooling Pad",
+    "subtitle": "Ventilated stand for daily laptop cooling",
+    "description": "A simple cooling pad to keep your laptop comfortable during long sessions.",
+    "image": "/assets/images/category_page/type-section/gaming.png",
+    "price": 21.99,
+    "originalPrice": 21.99,
+    "rating": 4.53,
+    "reviews": 436,
+    "brand": "Double",
+    "category": "Accessories",
+    "categorySlug": "accessories",
+    "fastShipping": true,
+    "inStock": true,
+    "sectionTags": [
+      "accessory"
+    ]
+  },
+  {
+    "id": 22,
+    "slug": "portable-drive-2tb",
+    "title": "Toshiba Canvio Basics 2TB",
+    "subtitle": "Portable external drive for backups",
+    "description": "Compact storage expansion for photos, projects, and backups.",
+    "image": "/assets/images/category_page/type-section/chromebook.png",
+    "price": 85.5,
+    "originalPrice": 95,
+    "rating": 4.53,
+    "reviews": 436,
+    "brand": "Toshiba",
+    "category": "Accessories",
+    "categorySlug": "accessories",
+    "fastShipping": true,
+    "inStock": true,
+    "discount": "10%",
+    "sectionTags": [
+      "accessory"
+    ]
   }
 ]

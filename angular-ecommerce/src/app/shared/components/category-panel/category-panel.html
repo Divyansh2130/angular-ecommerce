@@ -1,9 +1,8 @@
 <div class="absolute  left-0 top-full mt-2 w-[78vw] max-w-72 sm:w-64 bg-white z-100 shadow-xl rounded-xl border border-gray-200 p-4 sm:p-6 max-h-[60vh]">
   <ul class="space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg text-gray-700">
    @for (category of categories; track category.id) {
-  <li
-    class="cursor-pointer hover:text-blue-600 transition py-1">
-    {{ category.name }}
+  <li class="cursor-pointer hover:text-blue-600 transition py-1">
+    <a [routerLink]="['/category', category.slug]" class="block">{{ category.name }}</a>
   </li>
 }
   </ul>

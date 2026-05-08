@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from '@angular/core';
 import { BlogInterface } from '../../../../shared/models/blog.model';
 import { BlogSection } from '../../../../shared/components/blog-section/blog-section';
+import { MockContentService } from '../../../../core/services/mock-content.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-blog',
@@ -9,31 +11,37 @@ import { BlogSection } from '../../../../shared/components/blog-section/blog-sec
   templateUrl: './category-blog.html',
   styleUrl: './category-blog.css',
 })
-export class CategoryBlog {
-  blogs: BlogInterface[] = [
-    {
-      title: 'Pick the best laptop for your workflow',
-      highlight: 'laptop',
-      description: '',
-      image: 'assets/images/home/blogs/travel.jpg',
-      footerTitle: 'From student use to pro workloads',
-      footerDesc: 'Understand specs, battery life, and portability so you can choose a laptop that fits your daily needs.'
-    },
-    {
-      title: 'Gaming or creator laptop: what to buy?',
-      highlight: 'gaming',
-      description: '',
-      image: 'assets/images/home/blogs/smart-home.jpg',
-      footerTitle: 'Compare GPU power, thermals, and display quality',
-      footerDesc: 'A quick buying guide to choose the right machine based on performance, cooling, and screen requirements.'
-    },
-    {
-      title: 'Laptop maintenance made easy',
-      highlight: 'maintenance',
-      description: '',
-      image: 'assets/images/home/blogs/mobile.jpg',
-      footerTitle: 'Simple habits for longer laptop life',
-      footerDesc: 'Keep your laptop fast and reliable with practical tips for cleaning, charging, storage, and software updates.'
+export class CategoryBlog implements OnInit, OnChanges, OnDestroy {
+  @Input() category = 'Laptop';
+  blogs: BlogInterface[] = [];
+
+  private contentService = inject(MockContentService);
+  private contentSub?: Subscription;
+  private blogsMap: Record<string, BlogInterface[]> = {};
+
+  ngOnInit() {
+    this.contentSub = this.contentService.content$.subscribe((content) => {
+      this.blogsMap = content.categoryBlogsMap || {};
+      this.loadBlogsForCategory();
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['category']) {
+      this.loadBlogsForCategory();
     }
-  ];
+  }
+
+  ngOnDestroy() {
+    this.contentSub?.unsubscribe();
+  }
+
+  private loadBlogsForCategory() {
+    const categoryKey = this.category.charAt(0).toUpperCase() + this.category.slice(1);
+    this.blogs = this.blogsMap[categoryKey] || this.blogsMap['Laptop'] || [];
+  }
+
+  get sectionTitle(): string {
+    return `${this.category} tips and guides blog`;
+  }
 }

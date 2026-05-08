@@ -8,7 +8,7 @@
     
 
     <!-- Grid -->
-    <app-carousel [items]="products" cardWidth="%" [showDots]="true">
+    <app-carousel [items]="products" cardWidth="calc(100% / 4)" [showDots]="true">
 
         <ng-template let-product>
             <app-product-card [product]="product"></app-product-card>

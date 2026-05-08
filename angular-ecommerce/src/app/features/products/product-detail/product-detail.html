@@ -1,0 +1,242 @@
+@if (product) {
+<section class="px-[2vw] pt-8 pb-16 space-y-12">
+  <div class="text-xs text-gray-500">
+    <a routerLink="/" class="hover:text-blue-600">Home</a> &gt;
+    <a [routerLink]="['/categories', product.categorySlug]" class="hover:text-blue-600">{{ product.category }}</a> &gt;
+    <span class="text-blue-600">{{ product.title }}</span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-10 items-start">
+    <div>
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 flex items-center justify-center min-h-90">
+        <button type="button" (click)="openLightbox(selectedImage)" class="w-full">
+          <img [src]="selectedImage" [alt]="product.title" class="max-h-80 w-full object-contain cursor-zoom-in" />
+        </button>
+      </div>
+
+      @if (galleryImages.length > 0) {
+      <div class="mt-4 flex items-center gap-2">
+        <button type="button" (click)="scrollGallery('left')" [disabled]="!canScrollLeft()"
+          class="h-9 w-9 rounded-full border border-gray-300 bg-white text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed">
+          ‹
+        </button>
+
+        <div class="flex-1 overflow-hidden">
+          <div class="flex gap-3">
+            @for (image of visibleGalleryImages; track image) {
+            <button type="button" (click)="selectImage(image)"
+              class="w-20 h-20 rounded-xl border p-2 bg-white transition shrink-0"
+              [class.border-blue-600]="selectedImage === image"
+              [class.border-gray-200]="selectedImage !== image">
+              <img [src]="image" [alt]="product.title" class="h-full w-full object-contain" />
+            </button>
+            }
+          </div>
+        </div>
+
+        <button type="button" (click)="scrollGallery('right')" [disabled]="!canScrollRight()"
+          class="h-9 w-9 rounded-full border border-gray-300 bg-white text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed">
+          ›
+        </button>
+      </div>
+      }
+    </div>
+
+    <div class="space-y-5">
+      <div>
+        <h1 class="text-4xl font-semibold text-gray-800">{{ product.title }}</h1>
+        <p class="text-sm text-gray-500 mt-2">★ {{ product.rating }} ({{ product.reviews }})</p>
+      </div>
+
+      @if ((product.colors?.length || 0) > 0) {
+      <div>
+        <p class="text-sm font-medium text-gray-700 mb-3">Choose your colour</p>
+        <div class="flex items-center gap-3">
+          @for (color of product.colors; track color) {
+          <span class="w-6 h-6 rounded-full border border-gray-300 block" [style.background]="color"></span>
+          }
+        </div>
+      </div>
+      }
+
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="text-gray-400 line-through text-2xl">€{{ product.originalPrice }}</span>
+          <span class="text-[#f15b2a] font-semibold text-3xl">€{{ product.price }}</span>
+        </div>
+        <p class="text-[#f15b2a] text-sm mt-2">Delivered tomorrow</p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-8 py-3 font-medium">Buy now</button>
+        <button type="button" (click)="addToCart()"
+          class="border border-blue-300 text-blue-600 rounded-lg px-8 py-3 font-medium transition"
+          [class.bg-blue-50]="addedToCart()"
+          [class.border-blue-500]="addedToCart()">
+          {{ addedToCart() ? 'Added to Cart' : 'Add to Cart' }}
+        </button>
+        <button type="button" (click)="addToWishlist()"
+          class="border border-red-300 text-red-500 rounded-lg px-8 py-3 font-medium transition"
+          [class.bg-red-50]="addedToWishlist()"
+          [class.border-red-500]="addedToWishlist()">
+          {{ addedToWishlist() ? '♥ Wishlisted' : '♥ Wishlist' }}
+        </button>
+      </div>
+
+      <div class="space-y-3 text-sm text-gray-600">
+        <div class="flex items-center gap-2"><span class="text-green-500">◉</span> Order before 15:00 for same-day dispatch</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">◉</span> Easy returns within 30 days if you're not satisfied</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">◉</span> 2-year warranty and support included</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 border-t border-gray-200 pt-10">
+    <div>
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Product information & specifications</h2>
+      <ul class="space-y-3 text-sm text-gray-600 leading-6">
+        @for (bullet of product.featureBullets || []; track bullet) {
+        <li>• {{ bullet }}</li>
+        }
+      </ul>
+    </div>
+    <div class="space-y-2">
+      @for (spec of product.specs || []; track spec.label) {
+      <div class="grid grid-cols-2 rounded-lg overflow-hidden text-sm">
+        <div class="bg-gray-100 p-3 text-gray-600">{{ spec.label }}</div>
+        <div class="bg-gray-50 p-3 text-gray-800">{{ spec.value }}</div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="border-t border-gray-200 pt-10">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Description</h2>
+    <p class="text-sm text-gray-600 leading-7 max-w-5xl">{{ product.longDescription || product.description }}</p>
+  </div>
+
+  <div class="border-t border-gray-200 pt-10 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6">
+    <div class="border border-gray-200 rounded-xl p-5 bg-white h-fit">
+      <h3 class="text-xl font-semibold text-gray-800 mb-3">Customer reviews</h3>
+      <div class="text-3xl font-semibold text-gray-800 mb-1">{{ product.rating }}</div>
+      <p class="text-sm text-gray-500 mb-4">Based on {{ product.reviews }} reviews</p>
+      @if (product.ratingBreakdown) {
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 text-sm"><span class="w-10">5 star</span><div class="flex-1 h-2 rounded bg-gray-100"><div class="h-2 rounded bg-green-500" [style.width.%]="product.ratingBreakdown.star5Percentage"></div></div><span>{{ product.ratingBreakdown.star5Percentage }}%</span></div>
+        <div class="flex items-center gap-3 text-sm"><span class="w-10">4 star</span><div class="flex-1 h-2 rounded bg-gray-100"><div class="h-2 rounded bg-green-500" [style.width.%]="product.ratingBreakdown.star4Percentage"></div></div><span>{{ product.ratingBreakdown.star4Percentage }}%</span></div>
+        <div class="flex items-center gap-3 text-sm"><span class="w-10">3 star</span><div class="flex-1 h-2 rounded bg-gray-100"><div class="h-2 rounded bg-green-500" [style.width.%]="product.ratingBreakdown.star3Percentage"></div></div><span>{{ product.ratingBreakdown.star3Percentage }}%</span></div>
+        <div class="flex items-center gap-3 text-sm"><span class="w-10">2 star</span><div class="flex-1 h-2 rounded bg-gray-100"><div class="h-2 rounded bg-green-500" [style.width.%]="product.ratingBreakdown.star2Percentage"></div></div><span>{{ product.ratingBreakdown.star2Percentage }}%</span></div>
+        <div class="flex items-center gap-3 text-sm"><span class="w-10">1 star</span><div class="flex-1 h-2 rounded bg-gray-100"><div class="h-2 rounded bg-green-500" [style.width.%]="product.ratingBreakdown.star1Percentage"></div></div><span>{{ product.ratingBreakdown.star1Percentage }}%</span></div>
+      </div>
+      }
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="text-2xl font-semibold text-gray-800">User ratings and reviews</h2>
+      @for (review of product.ratingsAndReviews || []; track review.username + review.timestamp) {
+      <div class="border border-gray-200 rounded-xl p-5 bg-white">
+        <div class="flex items-center justify-between gap-4 mb-2">
+          <div class="text-sm font-medium text-gray-800">★ {{ review.ratings }} / 5</div>
+          <div class="text-xs text-gray-500">{{ review.timestamp }} • {{ review.username }}</div>
+        </div>
+        <p class="text-sm text-gray-600 leading-6">{{ review.review }}</p>
+        <div class="text-xs text-blue-600 mt-3">{{ review.likes }} people found this helpful</div>
+      </div>
+      }
+    </div>
+  </div>
+
+  @if (similarProducts.length > 0) {
+  <div class="border-t border-gray-200 pt-10">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-2xl font-semibold text-gray-800">Similar picks for you</h2>
+      <a [routerLink]="['/categories', product.categorySlug]" class="text-blue-600 text-sm">View all</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      @for (item of similarProducts; track item.id) {
+      <app-product-card [product]="item"></app-product-card>
+      }
+    </div>
+  </div>
+  }
+
+  @if (accessoryProducts.length > 0) {
+  <div class="border-t border-gray-200 pt-10">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-2xl font-semibold text-gray-800">Add these accessories to your order</h2>
+      <a [routerLink]="['/categories', 'accessories']" class="text-blue-600 text-sm">View all</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      @for (item of accessoryProducts; track item.id) {
+      <app-product-card [product]="item"></app-product-card>
+      }
+    </div>
+  </div>
+  }
+</section>
+
+@if (isLightboxOpen) {
+<div class="fixed inset-0 z-100 bg-black/40 flex items-center justify-center p-4" (click)="closeLightbox()">
+  <div class="w-full max-w-260 h-[76vh] bg-[#f3f3f3] rounded-lg border border-gray-300 flex flex-col" (click)="$event.stopPropagation()">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-300">
+      <div class="flex items-center gap-8 text-lg">
+        <button type="button" (click)="setMediaTab('images')"
+          class="pb-1 border-b-2 font-medium"
+          [class.text-blue-600]="activeMediaTab === 'images'"
+          [class.border-blue-600]="activeMediaTab === 'images'"
+          [class.text-gray-700]="activeMediaTab !== 'images'"
+          [class.border-transparent]="activeMediaTab !== 'images'">
+          Images
+        </button>
+        <button type="button" (click)="setMediaTab('videos')"
+          class="pb-1 border-b-2 font-medium"
+          [class.text-blue-600]="activeMediaTab === 'videos'"
+          [class.border-blue-600]="activeMediaTab === 'videos'"
+          [class.text-gray-700]="activeMediaTab !== 'videos'"
+          [class.border-transparent]="activeMediaTab !== 'videos'">
+          Videos
+        </button>
+      </div>
+      <button type="button" (click)="closeLightbox()" class="h-9 w-9 rounded-full border border-gray-400 text-xl leading-none">×</button>
+    </div>
+
+    @if (activeMediaTab === 'images') {
+    <div class="flex-1 flex items-center justify-center p-6">
+      <img [src]="selectedImage" [alt]="product.title" class="max-h-[46vh] w-full object-contain" />
+    </div>
+
+    <div class="px-6 pb-5">
+      <div class="flex items-center gap-3">
+        <button type="button" (click)="scrollLightboxThumbs('left')" [disabled]="!canLightboxScrollLeft()"
+          class="h-10 w-10 rounded-full border border-gray-400 bg-white text-xl disabled:opacity-40">‹</button>
+
+        <div class="flex-1 overflow-hidden">
+          <div class="flex gap-3">
+            @for (image of visibleLightboxThumbs; track image) {
+            <button type="button" (click)="selectImage(image)"
+              class="h-28 flex-1 min-w-34 rounded-xl border p-2 bg-white"
+              [class.border-blue-600]="selectedImage === image"
+              [class.border-gray-300]="selectedImage !== image">
+              <img [src]="image" [alt]="product.title" class="h-full w-full object-contain" />
+            </button>
+            }
+          </div>
+        </div>
+
+        <button type="button" (click)="scrollLightboxThumbs('right')" [disabled]="!canLightboxScrollRight()"
+          class="h-10 w-10 rounded-full border border-gray-400 bg-white text-xl disabled:opacity-40">›</button>
+      </div>
+    </div>
+    } @else {
+    <div class="flex-1 flex items-center justify-center text-gray-500 text-lg">
+      No videos available for this product yet.
+    </div>
+    }
+  </div>
+</div>
+}
+} @else {
+<section class="px-[2vw] py-20 text-center text-gray-500">
+  Product not found.
+</section>
+}

@@ -8,8 +8,9 @@
   <!-- Categories -->
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between gap-6">
 
-    <div 
+    <a 
       *ngFor="let category of categories"
+      [routerLink]="['/category', category.slug]"
       class="min-w-[200px] sm:min-w-[200px] lg:min-w-[200px] 
              bg-gray-100 rounded-xl border border-gray-300
              flex flex-col items-center justify-center 
@@ -26,7 +27,7 @@
         {{ category.name }}
       </p>
 
-    </div>
+  </a>
 
   </div>
 

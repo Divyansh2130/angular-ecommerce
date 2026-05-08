@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from '../../../../core/services/category.service';
 import { interval, Subscription } from 'rxjs';
-interface Category {
-  name: string;
-  image?: string;
-}
+import { MockContentService } from '../../../../core/services/mock-content.service';
+import { Category } from '../../../../shared/models/category.model';
 
 @Component({
   selector: 'app-hero-section',
@@ -12,30 +11,49 @@ interface Category {
   styleUrl: './hero-section.css',
 })
 export class HeroSection implements OnInit, OnDestroy {
-  private categoryServices = inject(CategoryService);
-  categories: Category[] = this.categoryServices.getCategories();
+  private categoryService = inject(CategoryService);
+  private contentService = inject(MockContentService);
+  private router = inject(Router);
 
-  heroImages: string[] = [
-    '/assets/images/home/lady_listening_2.png',
-    '/assets/images/home/lady.png'
-  ];
+  categories: Category[] = [];
+  heroImages: string[] = [];
   currentHeroIndex = 0;
 
+  private slideSub?: Subscription;
+  private categoriesSub?: Subscription;
+  private contentSub?: Subscription;
+
   get currentHeroImage(): string {
-    console.log('Get called:', this.currentHeroIndex);
-    return this.heroImages[this.currentHeroIndex];
+    return this.heroImages[this.currentHeroIndex] || '';
   }
 
-  private sub!: Subscription;
-
   ngOnInit(): void {
-    this.sub = interval(1000).subscribe(() => {
-    this.currentHeroIndex =
-      (this.currentHeroIndex + 1) % this.heroImages.length;
-  });
+    this.categoriesSub = this.categoryService.categories$.subscribe((categories) => {
+      this.categories = categories;
+    });
+
+    this.contentSub = this.contentService.content$.subscribe((content) => {
+      this.heroImages = content.heroImages || [];
+      if (this.currentHeroIndex >= this.heroImages.length) {
+        this.currentHeroIndex = 0;
+      }
+    });
+
+    this.slideSub = interval(3000).subscribe(() => {
+      if (!this.heroImages.length) {
+        return;
+      }
+      this.currentHeroIndex = (this.currentHeroIndex + 1) % this.heroImages.length;
+    });
   }
 
   ngOnDestroy(): void {
-     this.sub.unsubscribe();
+    this.slideSub?.unsubscribe();
+    this.categoriesSub?.unsubscribe();
+    this.contentSub?.unsubscribe();
+  }
+
+  openCategory(slug: string): void {
+    this.router.navigate(['/category', slug]);
   }
 }

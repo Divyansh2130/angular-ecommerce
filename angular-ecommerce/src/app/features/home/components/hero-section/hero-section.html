@@ -32,17 +32,21 @@
 
         <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 items-center">
 
-            <div class="flex justify-evenly gap-10 overflow-auto">
+            <div class="flex justify-evenly gap-10 overflow-x-auto no-scrollbar">
 
                 @for (category of categories; track category.name){
-                <div class="flex flex-col items-center justify-around ">
+                <button
+                    type="button"
+                    (click)="openCategory(category.slug)"
+                    class="flex flex-col items-center justify-around cursor-pointer hover:opacity-80 transition"
+                >
                     @if(category.image){
                     <div class="w-8 h-8 mb-2 ">
                         <img [src]="category.image" [alt]="category.name" class="w-full h-full object-contain object-center grayscale brightness-125" />
                     </div>
                     <span class="text-gray-700 text-centertext-sm font-medium grayscale brightness-125">{{ category.name }}</span>
                     }
-                </div>
+                </button>
 
                 }
 

@@ -1,16 +1,18 @@
-<div class="bg-gray-100 rounded-xl p-4 relative hover:shadow-lg transition border border-gray-300">
+<a [routerLink]="product.id ? ['/products', product.id] : null" class="block bg-gray-100 rounded-xl p-4 relative hover:shadow-lg transition border border-gray-300">
 
     <!-- Discount badge -->
+    @if (product.discount || product.tag) {
     <div class="absolute top-3 left-3 bg-orange-500 text-white text-sm px-2 py-1 rounded">
         {{ product.discount }}
         @if(product.tag){
         <span>{{ product.tag }}</span>
         }
     </div>
+    }
 
     <!-- Image -->
-    <div class="h-40 flex items-center justify-center">
-        <img [src]="product.image" alt="" class="h-[150%] w-[100%] object-contain" />
+    <div class="h-56 flex items-center justify-center">
+        <img [src]="product.image" alt="" class="h-full w-full object-contain" />
     </div>
 
     <!-- Title -->
@@ -36,4 +38,4 @@
     </div>
 
 
-</div>
+</a>

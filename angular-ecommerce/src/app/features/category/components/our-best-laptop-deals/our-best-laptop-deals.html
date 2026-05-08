@@ -1,9 +1,9 @@
 <div class="px-2 py-2 md:px-0">
-  <app-section-header title="Our Best Laptop Deals"></app-section-header>
+  <app-section-header [title]="sectionTitle"></app-section-header>
 
   <div class="border-b border-gray-300 mb-6"></div>
 
-  <app-carousel [items]="products" cardWidth="%" [showDots]="true">
+  <app-carousel [items]="products" cardWidth="calc(100% / 4)" [showDots]="true">
     <ng-template let-product>
       <app-product-card [product]="product"></app-product-card>
     </ng-template>

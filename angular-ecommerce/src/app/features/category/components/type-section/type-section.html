@@ -14,7 +14,11 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 bg-[#E5E5E5] p-6 w-100%">
     
         @for (type of types; track type.id) {
-        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition cursor-pointer p-4 flex flex-col items-center text-center">
+        <a
+            [routerLink]="['/categories', categorySlug]"
+            [queryParams]="{ type: type.name }"
+            class="bg-white rounded-xl shadow-sm hover:shadow-md transition cursor-pointer p-4 flex flex-col items-center text-center"
+        >
             <!-- Image -->
 
              
@@ -25,7 +29,7 @@
                 {{ type.name }}
             </p>
 
-        </div>
+        </a>
         }
 
     </div>

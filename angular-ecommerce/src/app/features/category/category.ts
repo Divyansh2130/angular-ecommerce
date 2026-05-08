@@ -1,68 +1,65 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Type } from '../../shared/models/type.model';
 import { CommonModule } from '@angular/common';
 import { TypeSection } from './components/type-section/type-section';
-import { ActivatedRoute } from '@angular/router';
-import { LaptopBrands } from "./components/laptop-brands/laptop-brands";
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { LaptopBrands } from './components/laptop-brands/laptop-brands';
 import { FeatureStrip, FeatureStripItem } from '../../shared/components/feature-strip/feature-strip';
 import { OurBestLaptopDeals } from './components/our-best-laptop-deals/our-best-laptop-deals';
 import { TrendingNow } from './components/trending-now/trending-now';
-import { FaqSection } from "./components/faq-section/faq-section";
+import { FaqSection } from './components/faq-section/faq-section';
 import { CategoryBlog } from './components/category-blog/category-blog';
+import { MockContentService } from '../../core/services/mock-content.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-category',
-  imports: [CommonModule, TypeSection, LaptopBrands, FeatureStrip, OurBestLaptopDeals, TrendingNow, FaqSection, CategoryBlog],
+  imports: [CommonModule, RouterLink, TypeSection, LaptopBrands, FeatureStrip, OurBestLaptopDeals, TrendingNow, FaqSection, CategoryBlog],
   templateUrl: './category.html',
   styleUrl: './category.css',
 })
-export class Category {
-   types: Type[] = [];
-   category = '';
-   features: FeatureStripItem[] = [
-    {
-      icon: '/assets/images/home/features/truck.png',
-      title: 'Free shipping',
-      description: 'On orders over €50'
-    },
-    {
-      icon: '/assets/images/home/features/refresh.png',
-      title: 'Easy returns',
-      description: 'Free within 30 days'
-    },
-    {
-      icon: '/assets/images/home/features/gift.png',
-      title: 'Special gifts',
-      description: 'Free with select orders.'
-    },
-    {
-      icon: '/assets/images/home/features/support.png',
-      title: 'Support 24/7',
-      description: 'Help when you need it'
-    },
-    {
-      icon: '/assets/images/home/features/secure_wallet.png',
-      title: 'Secured payment',
-      description: '100% safe'
-    }
-   ];
+export class Category implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private contentService = inject(MockContentService);
 
-constructor(private route: ActivatedRoute) {}
+  types: Type[] = [];
+  category = '';
+  categorySlug = 'laptop';
+  features: FeatureStripItem[] = [];
 
-ngOnInit() {
-  
-  const category = this.route.snapshot.paramMap.get('name');
-  this.category = category || '';
-  //Temporary for now will replace with API call later
-  if (category === 'laptops') {
-    this.types = [
-      { id: '1', name: 'Windows Laptops', image: 'assets/images/category_page/type-section/windows.png' },
-      { id: '2', name: 'Apple MacBooks', image: 'assets/images/category_page/type-section/macbook.png' },
-      { id: '3', name: 'Gaming Laptop', image: 'assets/images/category_page/type-section/gaming.png' },
-      { id: '4', name: 'Chromebooks', image: 'assets/images/category_page/type-section/chromebook.png' },
-      { id: '5', name: 'Laptop deals', image: 'assets/images/category_page/type-section/deals.png' },
-      { id: '6', name: 'All laptops', image: 'assets/images/category_page/type-section/all.png' }
-    ];
+  private typesMap: Record<string, Type[]> = {};
+  private contentSub?: Subscription;
+  private routeSub?: Subscription;
+
+  ngOnInit() {
+    this.routeSub = this.route.paramMap.subscribe((params) => {
+      const category = params.get('name');
+      this.category = category || '';
+      this.categorySlug = this.normalizeCategorySlug(category || 'laptop');
+      this.loadTypesForCategory(this.categorySlug);
+    });
+
+    this.contentSub = this.contentService.content$.subscribe((content) => {
+      this.features = content.sharedFeatureStrip || [];
+      this.typesMap = content.categoryTypesMap || {};
+      this.loadTypesForCategory(this.categorySlug);
+    });
   }
-}
 
+  ngOnDestroy() {
+    this.routeSub?.unsubscribe();
+    this.contentSub?.unsubscribe();
+  }
+
+  private loadTypesForCategory(slug: string) {
+    this.types = this.typesMap[slug] || [];
+  }
+
+  private normalizeCategorySlug(value: string): string {
+    const trimmed = value.trim().toLowerCase();
+    if (trimmed === 'laptops') {
+      return 'laptop';
+    }
+    return trimmed;
+  }
 }

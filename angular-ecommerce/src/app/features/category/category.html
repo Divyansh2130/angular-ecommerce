@@ -1,12 +1,17 @@
-<div class="space-y-12 px-[2vw] py-10">
-  <div class="h-[1vh]"></div>
-  <app-type-section [types]="types" [category]="category"></app-type-section>
-  <app-laptop-brands></app-laptop-brands>
+<div class="space-y-8 px-[2vw] py-10">
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 text-sm text-gray-500 pb-4">
+    <a routerLink="/" class="hover:text-blue-600 transition-colors">Home</a>
+    <span class="text-gray-400">&gt;</span>
+    <span class="text-blue-600 font-medium capitalize">{{ category }}</span>
+  </nav>
+  <app-type-section [types]="types" [category]="category" [categorySlug]="categorySlug"></app-type-section>
+  <app-laptop-brands [categorySlug]="categorySlug"></app-laptop-brands>
   <app-feature-strip [items]="features"></app-feature-strip>
-  <app-our-best-laptop-deals></app-our-best-laptop-deals>
+  <app-our-best-laptop-deals [category]="category"></app-our-best-laptop-deals>
   <app-trending-now></app-trending-now>
   <app-faq-section [category]="category"></app-faq-section>
-  <app-category-blog></app-category-blog>
+  <app-category-blog [category]="category"></app-category-blog>
   <!-- <app-brand-section [brands]="brands"></app-brand-section>
 
   <app-deals-section></app-deals-section>

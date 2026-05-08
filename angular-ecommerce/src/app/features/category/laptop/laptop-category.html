@@ -1,0 +1,138 @@
+<section class="px-[2vw] pt-8 pb-12">
+  <div class="text-xs text-gray-500 mb-4">
+    <button type="button" (click)="openHome()" class="hover:text-blue-600">Home</button>
+    &gt;
+    <button type="button" (click)="openCategoryPage()" class="hover:text-blue-600">Category</button>
+    &gt;
+    <span class="text-blue-600">{{ categoryLabel }}</span>
+  </div>
+  <h1 class="text-4xl font-semibold text-gray-800 mb-6">Explore {{ categoryLabel }}</h1>
+
+  <div class="flex flex-col lg:flex-row gap-5">
+    <aside class="w-full lg:w-72.5 bg-white border border-gray-200 rounded-xl p-4 h-fit">
+      <div class="mb-6">
+        <h3 class="font-semibold text-gray-800 mb-3">Price</h3>
+        <div class="text-sm text-gray-600 mb-2">Up to: €{{ maxPrice }}</div>
+        <input
+          type="range"
+          min="300"
+          max="2000"
+          step="50"
+          [value]="maxPrice"
+          (input)="maxPrice = +$any($event.target).value"
+          class="w-full accent-blue-600"
+        />
+      </div>
+
+      <div class="space-y-3 border-t border-gray-100 pt-4 mb-5">
+        <label class="flex items-center justify-between text-sm text-gray-700 cursor-pointer">
+          <span>Fast shipping</span>
+          <input type="checkbox" [checked]="fastShippingOnly" (change)="fastShippingOnly = $any($event.target).checked" class="accent-blue-600" />
+        </label>
+        <label class="flex items-center justify-between text-sm text-gray-700 cursor-pointer">
+          <span>Only available items</span>
+          <input type="checkbox" [checked]="onlyAvailable" (change)="onlyAvailable = $any($event.target).checked" class="accent-blue-600" />
+        </label>
+      </div>
+
+      <div class="border-t border-gray-100 pt-4 mb-5">
+        <h3 class="font-semibold text-gray-800 mb-3">Brand</h3>
+        <div class="space-y-2">
+          @for (brand of brandOptions; track brand) {
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+              <input
+                type="checkbox"
+                [checked]="selectedBrands.has(brand)"
+                (change)="toggleInSet(selectedBrands, brand, $any($event.target).checked)"
+                class="accent-blue-600"
+              />
+              {{ brand }}
+            </label>
+          }
+        </div>
+      </div>
+
+      @if (ramOptions.length > 0) {
+      <div class="border-t border-gray-100 pt-4 mb-5">
+        <h3 class="font-semibold text-gray-800 mb-3">RAM</h3>
+        <div class="space-y-2">
+          @for (ram of ramOptions; track ram) {
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+              <input
+                type="checkbox"
+                [checked]="selectedRam.has(ram)"
+                (change)="toggleInSet(selectedRam, ram, $any($event.target).checked)"
+                class="accent-blue-600"
+              />
+              {{ ram }}
+            </label>
+          }
+        </div>
+      </div>
+      }
+
+      @if (osOptions.length > 0) {
+      <div class="border-t border-gray-100 pt-4">
+        <h3 class="font-semibold text-gray-800 mb-3">Operating system</h3>
+        <div class="space-y-2">
+          @for (os of osOptions; track os) {
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+              <input
+                type="checkbox"
+                [checked]="selectedOs.has(os)"
+                (change)="toggleInSet(selectedOs, os, $any($event.target).checked)"
+                class="accent-blue-600"
+              />
+              {{ os }}
+            </label>
+          }
+        </div>
+      </div>
+      }
+    </aside>
+
+    <div class="flex-1">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+        <div class="text-gray-700 font-medium">
+          {{ categoryLabel }} <span class="text-gray-400 text-sm">{{ filteredProducts.length }} products</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-600">
+          <span>Sort by:</span>
+          <select
+            [value]="sortBy"
+            (change)="sortBy = $any($event.target).value"
+            class="border border-gray-300 rounded-md px-2 py-1.5 text-sm bg-white"
+          >
+            <option value="recommended">Recommended</option>
+            <option value="priceAsc">Price: Low to High</option>
+            <option value="priceDesc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        @for (product of filteredProducts; track product.id) {
+          <button type="button" (click)="openProduct(product.id)" class="block w-full text-left bg-white border border-gray-200 rounded-xl p-3 hover:shadow-md transition">
+            <div class="aspect-4/3 bg-gray-50 rounded-lg flex items-center justify-center mb-3 overflow-hidden">
+              <img [src]="product.image" [alt]="product.title" class="h-full w-full object-contain" />
+            </div>
+            <h3 class="text-sm font-semibold text-gray-800 mb-1">{{ product.title }}</h3>
+            <p class="text-xs text-gray-500 mb-2">{{ product.subtitle }}</p>
+            <div class="flex items-end justify-between gap-2">
+              <div>
+                <p class="text-xs text-gray-400 line-through">€{{ product.originalPrice }}</p>
+                <p class="text-red-500 font-semibold">€{{ product.price }}</p>
+              </div>
+              <div class="text-xs text-gray-600">★ {{ product.rating }} ({{ product.reviews }})</div>
+            </div>
+          </button>
+        }
+      </div>
+
+      @if (filteredProducts.length === 0) {
+        <div class="text-center py-16 text-gray-500">No products found for {{ categoryLabel }} with current filters.</div>
+      }
+    </div>
+  </div>
+</section>

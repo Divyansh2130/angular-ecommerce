@@ -1,0 +1,382 @@
+{
+  "heroImages": [
+    "/assets/images/home/lady_listening_2.png",
+    "/assets/images/home/lady.png"
+  ],
+  "shopByCategories": [
+    {
+      "id": 1,
+      "name": "Camera",
+      "slug": "camera",
+      "image": "assets/images/home/category/camera.png"
+    },
+    {
+      "id": 2,
+      "name": "Smart watch",
+      "slug": "smart-watch",
+      "image": "assets/images/home/category/smartwatch.png"
+    },
+    {
+      "id": 3,
+      "name": "Smart phone",
+      "slug": "smart-phone",
+      "image": "assets/images/home/category/smartphone.png"
+    },
+    {
+      "id": 4,
+      "name": "Headphones",
+      "slug": "headphones",
+      "image": "assets/images/home/category/headphone.png"
+    },
+    {
+      "id": 5,
+      "name": "Laptop",
+      "slug": "laptop",
+      "image": "assets/images/home/category/laptop.png"
+    },
+    {
+      "id": 6,
+      "name": "Speaker",
+      "slug": "speaker",
+      "image": "assets/images/home/category/speaker.png"
+    }
+  ],
+  "homeBlogs": [
+    {
+      "title": "Travel light, travel smart!",
+      "highlight": "light",
+      "description": "",
+      "image": "assets/images/home/blogs/travel.jpg",
+      "footerTitle": "Explore lightweight tech for effortless travel",
+      "footerDesc": "From portable power to compact gadgets, discover the best tech to make your travels smoother and more convenient."
+    },
+    {
+      "title": "Turn your space into a smart home",
+      "highlight": "smart home",
+      "description": "",
+      "image": "assets/images/home/blogs/smart-home.jpg",
+      "footerTitle": "Smart tech for lighting, security, & climate",
+      "footerDesc": "Easily control lighting, security, and climate with smart devices that simplify your home's atmosphere."
+    },
+    {
+      "title": "Step-by-step guides",
+      "image": "assets/images/home/blogs/mobile.jpg",
+      "description": "",
+      "footerTitle": "Affordable used mobile phones",
+      "footerDesc": "Get quality used mobile phones at unbeatable prices, with top brands and reliable performance."
+    }
+  ],
+  "topBrands": [
+    {
+      "icon": "/assets/images/home/top-brands/samsung.png"
+    },
+    {
+      "icon": "/assets/images/home/top-brands/lg.png"
+    },
+    {
+      "icon": "/assets/images/home/top-brands/microsoft.png"
+    },
+    {
+      "icon": "/assets/images/home/top-brands/sony.png"
+    },
+    {
+      "icon": "/assets/images/home/top-brands/apple.png"
+    }
+  ],
+  "laptopBrands": [
+    {
+      "name": "HP",
+      "icon": "/assets/images/home/top-brands/samsung.png"
+    },
+    {
+      "name": "Dell",
+      "icon": "/assets/images/home/top-brands/lg.png"
+    },
+    {
+      "name": "Lenovo",
+      "icon": "/assets/images/home/top-brands/microsoft.png"
+    },
+    {
+      "name": "Acer",
+      "icon": "/assets/images/home/top-brands/sony.png"
+    },
+    {
+      "name": "Apple",
+      "icon": "/assets/images/home/top-brands/apple.png"
+    },
+    {
+      "name": "ASUS",
+      "icon": "/assets/images/home/top-brands/lg.png"
+    }
+  ],
+  "sharedFeatureStrip": [
+    {
+      "icon": "/assets/images/home/features/truck.png",
+      "title": "Free shipping",
+      "description": "On orders over €50"
+    },
+    {
+      "icon": "/assets/images/home/features/refresh.png",
+      "title": "Easy returns",
+      "description": "Free within 30 days"
+    },
+    {
+      "icon": "/assets/images/home/features/gift.png",
+      "title": "Special gifts",
+      "description": "Free with select orders."
+    },
+    {
+      "icon": "/assets/images/home/features/support.png",
+      "title": "Support 24/7",
+      "description": "Help when you need it"
+    },
+    {
+      "icon": "/assets/images/home/features/secure_wallet.png",
+      "title": "Secured payment",
+      "description": "100% safe"
+    }
+  ],
+  "categoryTypesMap": {
+    "laptop": [
+      {
+        "id": "1",
+        "name": "Windows Laptops",
+        "image": "assets/images/category_page/type-section/windows.png"
+      },
+      {
+        "id": "2",
+        "name": "Apple MacBooks",
+        "image": "assets/images/category_page/type-section/macbook.png"
+      },
+      {
+        "id": "3",
+        "name": "Gaming Laptop",
+        "image": "assets/images/category_page/type-section/gaming.png"
+      },
+      {
+        "id": "4",
+        "name": "Chromebooks",
+        "image": "assets/images/category_page/type-section/chromebook.png"
+      },
+      {
+        "id": "5",
+        "name": "Laptop deals",
+        "image": "assets/images/category_page/type-section/deals.png"
+      },
+      {
+        "id": "6",
+        "name": "All laptops",
+        "image": "assets/images/category_page/type-section/all.png"
+      }
+    ],
+    "smart-phone": [
+      {
+        "id": "1",
+        "name": "iPhones",
+        "image": "assets/images/category_page/type-section/macbook.png"
+      },
+      {
+        "id": "2",
+        "name": "Samsung",
+        "image": "assets/images/category_page/type-section/windows.png"
+      },
+      {
+        "id": "3",
+        "name": "Budget Phones",
+        "image": "assets/images/category_page/type-section/all.png"
+      },
+      {
+        "id": "4",
+        "name": "Flagship Deals",
+        "image": "assets/images/category_page/type-section/deals.png"
+      }
+    ],
+    "headphones": [
+      {
+        "id": "1",
+        "name": "Over-ear",
+        "image": "assets/images/category_page/type-section/windows.png"
+      },
+      {
+        "id": "2",
+        "name": "In-ear",
+        "image": "assets/images/category_page/type-section/all.png"
+      },
+      {
+        "id": "3",
+        "name": "Wireless",
+        "image": "assets/images/category_page/type-section/gaming.png"
+      },
+      {
+        "id": "4",
+        "name": "Budget Friendly",
+        "image": "assets/images/category_page/type-section/deals.png"
+      }
+    ]
+  },
+  "categoryFaqsMap": {
+    "Laptop": [
+      {
+        "question": "Which operating system do I need?",
+        "answer": "Windows is ideal for general use and gaming. macOS is preferred for design and development. Linux is best for technical users.",
+        "isOpen": true
+      },
+      {
+        "question": "Which laptop suits my studies?",
+        "answer": "For students, lightweight laptops with good battery life are recommended."
+      },
+      {
+        "question": "How do I choose a MacBook?",
+        "answer": "Choose based on performance needs: Air for light use, Pro for heavy tasks."
+      },
+      {
+        "question": "What size laptop do I need?",
+        "answer": "13-14 inch for portability, 15-16 inch for performance and screen size."
+      },
+      {
+        "question": "Which processor do I need?",
+        "answer": "i5/Ryzen 5 for normal use, i7/Ryzen 7 for heavy tasks."
+      }
+    ],
+    "Smart-phone": [
+      {
+        "question": "Should I buy iPhone or Android?",
+        "answer": "iPhone offers iOS ecosystem and privacy. Android provides more customization and variety.",
+        "isOpen": true
+      },
+      {
+        "question": "What storage capacity do I need?",
+        "answer": "128GB for basic use, 256GB for photos and videos, 512GB+ for heavy users."
+      },
+      {
+        "question": "What is 5G and do I need it?",
+        "answer": "5G is faster mobile internet. It is useful if available in your area and you need faster speeds."
+      },
+      {
+        "question": "What camera specs matter most?",
+        "answer": "Megapixels matter less than sensor size, computational photography, and zoom capabilities."
+      },
+      {
+        "question": "How long does battery last?",
+        "answer": "Flagship phones offer 1-2 days of battery life depending on usage patterns."
+      }
+    ],
+    "Headphones": [
+      {
+        "question": "Should I buy wireless or wired headphones?",
+        "answer": "Wireless offers convenience and freedom of movement. Wired eliminates charging concerns and latency.",
+        "isOpen": true
+      },
+      {
+        "question": "What is active noise cancellation?",
+        "answer": "ANC uses technology to reduce background noise. It works best for constant sounds like airplane engines."
+      },
+      {
+        "question": "What audio codec should I choose?",
+        "answer": "AAC is standard, LDAC offers better quality, SBC is basic. Choose based on source device support."
+      },
+      {
+        "question": "How important is impedance?",
+        "answer": "Lower impedance (16-32 ohms) is better for portable devices. Higher impedance needs better amplification."
+      },
+      {
+        "question": "What frequency response do I need?",
+        "answer": "Human hearing is 20Hz-20kHz. Choose headphones with flat response for accurate audio."
+      }
+    ]
+  },
+  "categoryBlogsMap": {
+    "Laptop": [
+      {
+        "title": "Pick the best laptop for your workflow",
+        "highlight": "laptop",
+        "description": "",
+        "image": "assets/images/home/blogs/travel.jpg",
+        "footerTitle": "From student use to pro workloads",
+        "footerDesc": "Understand specs, battery life, and portability so you can choose a laptop that fits your daily needs."
+      },
+      {
+        "title": "Gaming or creator laptop: what to buy?",
+        "highlight": "gaming",
+        "description": "",
+        "image": "assets/images/home/blogs/smart-home.jpg",
+        "footerTitle": "Compare GPU power, thermals, and display quality",
+        "footerDesc": "A quick buying guide to choose the right machine based on performance, cooling, and screen requirements."
+      },
+      {
+        "title": "Laptop maintenance made easy",
+        "highlight": "maintenance",
+        "description": "",
+        "image": "assets/images/home/blogs/mobile.jpg",
+        "footerTitle": "Simple habits for longer laptop life",
+        "footerDesc": "Keep your laptop fast and reliable with practical tips for cleaning, charging, storage, and software updates."
+      }
+    ],
+    "Smart-phone": [
+      {
+        "title": "Choosing the right smartphone for you",
+        "highlight": "smartphone",
+        "description": "",
+        "image": "assets/images/home/blogs/mobile.jpg",
+        "footerTitle": "iOS vs Android: What fits your needs",
+        "footerDesc": "Compare features, ecosystems, and performance to find the perfect phone for your lifestyle."
+      },
+      {
+        "title": "Smartphone camera guide: 2024 edition",
+        "highlight": "camera",
+        "description": "",
+        "image": "assets/images/home/blogs/travel.jpg",
+        "footerTitle": "Megapixels, zoom, and computational photography",
+        "footerDesc": "Learn what specs actually matter for taking great photos and videos with your phone."
+      },
+      {
+        "title": "Phone battery care and optimization",
+        "highlight": "battery",
+        "description": "",
+        "image": "assets/images/home/blogs/smart-home.jpg",
+        "footerTitle": "Extend your battery health",
+        "footerDesc": "Simple tips to maintain your phone battery life and performance over years of use."
+      }
+    ],
+    "Headphones": [
+      {
+        "title": "Finding your perfect headphones",
+        "highlight": "headphones",
+        "description": "",
+        "image": "assets/images/home/blogs/travel.jpg",
+        "footerTitle": "Over-ear, on-ear, or in-ear?",
+        "footerDesc": "Understand the pros and cons of each style and which suits your daily activities best."
+      },
+      {
+        "title": "Noise cancellation explained",
+        "highlight": "noise cancellation",
+        "description": "",
+        "image": "assets/images/home/blogs/smart-home.jpg",
+        "footerTitle": "Active vs Passive: What is the difference",
+        "footerDesc": "How ANC works and whether it is worth the extra cost for your use case."
+      },
+      {
+        "title": "Audio quality: What specs really matter",
+        "highlight": "audio quality",
+        "description": "",
+        "image": "assets/images/home/blogs/mobile.jpg",
+        "footerTitle": "Frequency response, impedance, and codecs",
+        "footerDesc": "Cut through the jargon and understand what affects sound quality in headphones."
+      }
+    ]
+  },
+  "authSteps": [
+    {
+      "label": "Sign up",
+      "icon": "user"
+    },
+    {
+      "label": "Verify email",
+      "icon": "mail"
+    },
+    {
+      "label": "Add info",
+      "icon": "check"
+    }
+  ]
+}

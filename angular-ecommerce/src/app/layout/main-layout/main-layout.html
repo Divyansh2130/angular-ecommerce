@@ -4,7 +4,7 @@
     <!-- Page Content -->
     <main>
         <div class="mx-auto">
-            <app-navbar></app-navbar>
+            <app-navbar [variant]="isHomePage ? 'home' : 'page'"></app-navbar>
             <router-outlet></router-outlet>
             <app-footer></app-footer>
         </div>
