@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../../../core/services/category.service';
 import { interval, Subscription } from 'rxjs';
 import { MockContentService } from '../../../../core/services/mock-content.service';
 import { Category } from '../../../../shared/models/category.model';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-hero-section',
@@ -15,42 +16,43 @@ export class HeroSection implements OnInit, OnDestroy {
   private contentService = inject(MockContentService);
   private router = inject(Router);
 
-  categories: Category[] = [];
-  heroImages: string[] = [];
-  currentHeroIndex = 0;
+  private readonly categoriesSignal = toSignal(this.categoryService.categories$, {
+    initialValue: this.categoryService.getCategories(),
+  });
+  private readonly content = toSignal(this.contentService.content$, { initialValue: this.contentService.content });
+  private readonly heroImagesSignal = computed(() => this.content().heroImages || []);
+  readonly currentHeroIndex = signal(0);
 
   private slideSub?: Subscription;
-  private categoriesSub?: Subscription;
-  private contentSub?: Subscription;
+
+  get categories(): Category[] {
+    return this.categoriesSignal();
+  }
+
+  get heroImages(): string[] {
+    return this.heroImagesSignal();
+  }
 
   get currentHeroImage(): string {
-    return this.heroImages[this.currentHeroIndex] || '';
+    const images = this.heroImages;
+    if (!images.length) {
+      return '';
+    }
+    return images[this.currentHeroIndex() % images.length] || '';
   }
 
   ngOnInit(): void {
-    this.categoriesSub = this.categoryService.categories$.subscribe((categories) => {
-      this.categories = categories;
-    });
-
-    this.contentSub = this.contentService.content$.subscribe((content) => {
-      this.heroImages = content.heroImages || [];
-      if (this.currentHeroIndex >= this.heroImages.length) {
-        this.currentHeroIndex = 0;
-      }
-    });
-
     this.slideSub = interval(3000).subscribe(() => {
-      if (!this.heroImages.length) {
+      const images = this.heroImages;
+      if (!images.length) {
         return;
       }
-      this.currentHeroIndex = (this.currentHeroIndex + 1) % this.heroImages.length;
+      this.currentHeroIndex.update((index) => (index + 1) % images.length);
     });
   }
 
   ngOnDestroy(): void {
     this.slideSub?.unsubscribe();
-    this.categoriesSub?.unsubscribe();
-    this.contentSub?.unsubscribe();
   }
 
   openCategory(slug: string): void {

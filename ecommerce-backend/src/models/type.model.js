@@ -1,28 +1,26 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const brandSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true
-        },
+const typeSchema = new mongoose.Schema(
+	{
+		category: {
+			type: String,
+			required: true,
+			trim: true,
+			index: true
+		},
+		image: {
+			type: String,
+			default: ''
+		},
+		name: {
+			type: String,
+			required: true,
+			trim: true
+		}
+	},
+	{ timestamps: true }
+);
 
-        slug: {
-            type: String,
-            required: true
-        },
+typeSchema.index({ category: 1, name: 1 });
 
-        logo: {
-            type: String
-        },
-
-        isFeatured: {
-            type: Boolean,
-            default: false
-        }
-    },
-    { timestamps: true }
-)
-
-brandSchema.index({name:1,slug:1});
-export default mongoose.model('Brand', brandSchema);
+export default mongoose.model('Type', typeSchema);

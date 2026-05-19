@@ -1,11 +1,11 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Carousel } from '../../../../shared/components/carousel/carousel';
 import { ProductCard } from '../../../../shared/components/product-card/product-card';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../../shared/models/product.model';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
 import { ProductCatalogService } from '../../../../core/services/product-catalog.service';
-import { Subscription } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-best-sellers',
@@ -13,19 +13,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './best-sellers.html',
   styleUrl: './best-sellers.css',
 })
-export class BestSellers implements OnInit, OnDestroy {
+export class BestSellers {
   private productCatalog = inject(ProductCatalogService);
-  private productsSub?: Subscription;
+  private readonly productsState = toSignal(this.productCatalog.products$, {
+    initialValue: this.productCatalog.getAllProducts(),
+  });
 
-  products: Product[] = [];
-
-  ngOnInit() {
-    this.productsSub = this.productCatalog.products$.subscribe(() => {
-      this.products = this.productCatalog.getProductsBySection('best-seller');
-    });
-  }
-
-  ngOnDestroy() {
-    this.productsSub?.unsubscribe();
+  get products(): Product[] {
+    this.productsState();
+    return this.productCatalog.getProductsBySection('best-seller');
   }
 }

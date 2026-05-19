@@ -22,18 +22,21 @@ const productSchema = new mongoose.Schema(
 
     // RELATIONS
     category: {
-      type: String, // "laptops", "mobiles"
+      type: mongoose.Schema.Types.ObjectId, // "laptops", "mobiles"
+      ref:'Category',
       required: true,
       index: true
     },
 
     type: {
-      type: String, // "gaming", "android"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Type',
       index: true
     },
 
     brand: {
-      type: String, // "apple", "samsung"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Brand',
       index: true
     },
 

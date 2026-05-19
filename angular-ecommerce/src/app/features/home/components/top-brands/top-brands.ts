@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
 import { MockContentService } from '../../../../core/services/mock-content.service';
-import { Subscription } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-top-brands',
@@ -9,19 +9,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './top-brands.html',
   styleUrl: './top-brands.css',
 })
-export class TopBrands implements OnInit, OnDestroy {
+export class TopBrands {
   private contentService = inject(MockContentService);
-  private contentSub?: Subscription;
+  private readonly content = toSignal(this.contentService.content$, { initialValue: this.contentService.content });
 
-  features: { icon: string }[] = [];
-
-  ngOnInit() {
-    this.contentSub = this.contentService.content$.subscribe((content) => {
-      this.features = (content.topBrands || []).map((item) => ({ icon: item.icon }));
-    });
-  }
-
-  ngOnDestroy() {
-    this.contentSub?.unsubscribe();
+  get features(): { icon: string }[] {
+    return (this.content().topBrands || []).map((item) => ({ icon: item.icon }));
   }
 }

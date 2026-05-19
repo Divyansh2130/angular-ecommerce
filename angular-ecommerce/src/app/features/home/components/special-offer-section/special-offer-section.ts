@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../../shared/models/product.model';
 import { ProductCard } from '../../../../shared/components/product-card/product-card';
@@ -7,7 +7,7 @@ import { SectionHeader } from '../../../../shared/components/section-header/sect
 import { FeatureStrip, FeatureStripItem } from '../../../../shared/components/feature-strip/feature-strip';
 import { ProductCatalogService } from '../../../../core/services/product-catalog.service';
 import { MockContentService } from '../../../../core/services/mock-content.service';
-import { Subscription } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-special-offer-section',
@@ -16,28 +16,20 @@ import { Subscription } from 'rxjs';
   templateUrl: './special-offer-section.html',
   styleUrl: './special-offer-section.css'
 })
-export class SpecialOfferSectionComponent implements OnInit, OnDestroy {
+export class SpecialOfferSectionComponent {
   private productCatalog = inject(ProductCatalogService);
   private contentService = inject(MockContentService);
+  private readonly productsState = toSignal(this.productCatalog.products$, {
+    initialValue: this.productCatalog.getAllProducts(),
+  });
+  private readonly content = toSignal(this.contentService.content$, { initialValue: this.contentService.content });
 
-  private productsSub?: Subscription;
-  private contentSub?: Subscription;
-
-  products: Product[] = [];
-  features: FeatureStripItem[] = [];
-
-  ngOnInit() {
-    this.productsSub = this.productCatalog.products$.subscribe(() => {
-      this.products = this.productCatalog.getProductsBySection('special-offer');
-    });
-
-    this.contentSub = this.contentService.content$.subscribe((content) => {
-      this.features = content.sharedFeatureStrip || [];
-    });
+  get products(): Product[] {
+    this.productsState();
+    return this.productCatalog.getProductsBySection('special-offer');
   }
 
-  ngOnDestroy() {
-    this.productsSub?.unsubscribe();
-    this.contentSub?.unsubscribe();
+  get features(): FeatureStripItem[] {
+    return this.content().sharedFeatureStrip || [];
   }
 }
