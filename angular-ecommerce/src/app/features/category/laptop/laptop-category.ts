@@ -28,6 +28,8 @@ export class LaptopCategory implements OnInit {
   onlyAvailable = false;
   fastShippingOnly = false;
   sortBy: 'recommended' | 'priceAsc' | 'priceDesc' | 'rating' = 'recommended';
+  pageSize = 9;
+  currentPage = 1;
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -54,6 +56,7 @@ export class LaptopCategory implements OnInit {
     this.onlyAvailable = false;
     this.fastShippingOnly = false;
     this.sortBy = 'recommended';
+    this.currentPage = 1;
     this.maxPrice = Math.max(...this.categoryProducts.map((p) => p.price), 2000);
   }
 
@@ -71,6 +74,7 @@ export class LaptopCategory implements OnInit {
     }
 
     this.applyTypeQuery(type);
+    this.currentPage = 1;
   }
 
   private applyTypeQuery(type: string | null) {
@@ -159,6 +163,27 @@ export class LaptopCategory implements OnInit {
     } else {
       set.delete(value);
     }
+    this.currentPage = 1;
+  }
+
+  onMaxPriceChange(value: number) {
+    this.maxPrice = value;
+    this.currentPage = 1;
+  }
+
+  onFastShippingChange(checked: boolean) {
+    this.fastShippingOnly = checked;
+    this.currentPage = 1;
+  }
+
+  onOnlyAvailableChange(checked: boolean) {
+    this.onlyAvailable = checked;
+    this.currentPage = 1;
+  }
+
+  onSortChange(value: string) {
+    this.sortBy = value as 'recommended' | 'priceAsc' | 'priceDesc' | 'rating';
+    this.currentPage = 1;
   }
 
   openProduct(id: number) {
@@ -200,5 +225,37 @@ export class LaptopCategory implements OnInit {
     }
 
     return result;
+  }
+
+  get totalPages(): number {
+    return Math.max(Math.ceil(this.filteredProducts.length / this.pageSize), 1);
+  }
+
+  get paginatedProducts(): Product[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredProducts.slice(start, start + this.pageSize);
+  }
+
+  get visibleStart(): number {
+    if (this.filteredProducts.length === 0) {
+      return 0;
+    }
+    return (this.currentPage - 1) * this.pageSize + 1;
+  }
+
+  get visibleEnd(): number {
+    return Math.min(this.currentPage * this.pageSize, this.filteredProducts.length);
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage -= 1;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage += 1;
+    }
   }
 }

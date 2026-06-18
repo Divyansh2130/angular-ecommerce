@@ -19,7 +19,7 @@
           max="2000"
           step="50"
           [value]="maxPrice"
-          (input)="maxPrice = +$any($event.target).value"
+          (input)="onMaxPriceChange(+$any($event.target).value)"
           class="w-full accent-blue-600"
         />
       </div>
@@ -27,11 +27,11 @@
       <div class="space-y-3 border-t border-gray-100 pt-4 mb-5">
         <label class="flex items-center justify-between text-sm text-gray-700 cursor-pointer">
           <span>Fast shipping</span>
-          <input type="checkbox" [checked]="fastShippingOnly" (change)="fastShippingOnly = $any($event.target).checked" class="accent-blue-600" />
+          <input type="checkbox" [checked]="fastShippingOnly" (change)="onFastShippingChange($any($event.target).checked)" class="accent-blue-600" />
         </label>
         <label class="flex items-center justify-between text-sm text-gray-700 cursor-pointer">
           <span>Only available items</span>
-          <input type="checkbox" [checked]="onlyAvailable" (change)="onlyAvailable = $any($event.target).checked" class="accent-blue-600" />
+          <input type="checkbox" [checked]="onlyAvailable" (change)="onOnlyAvailableChange($any($event.target).checked)" class="accent-blue-600" />
         </label>
       </div>
 
@@ -100,7 +100,7 @@
           <span>Sort by:</span>
           <select
             [value]="sortBy"
-            (change)="sortBy = $any($event.target).value"
+            (change)="onSortChange($any($event.target).value)"
             class="border border-gray-300 rounded-md px-2 py-1.5 text-sm bg-white"
           >
             <option value="recommended">Recommended</option>
@@ -112,7 +112,7 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        @for (product of filteredProducts; track product.id) {
+        @for (product of paginatedProducts; track product.id) {
           <button type="button" (click)="openProduct(product.id)" class="block w-full text-left bg-white border border-gray-200 rounded-xl p-3 hover:shadow-md transition">
             <div class="aspect-4/3 bg-gray-50 rounded-lg flex items-center justify-center mb-3 overflow-hidden">
               <img [src]="product.image" [alt]="product.title" class="h-full w-full object-contain" />
@@ -132,6 +132,33 @@
 
       @if (filteredProducts.length === 0) {
         <div class="text-center py-16 text-gray-500">No products found for {{ categoryLabel }} with current filters.</div>
+      }
+
+      @if (filteredProducts.length > 0 && totalPages > 1) {
+        <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p class="text-sm text-gray-500">
+            Showing {{ visibleStart }}-{{ visibleEnd }} of {{ filteredProducts.length }}
+          </p>
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              class="px-3 py-1.5 rounded-md border border-gray-300 text-sm text-gray-700 disabled:opacity-50"
+              [disabled]="currentPage === 1"
+              (click)="previousPage()"
+            >
+              Previous
+            </button>
+            <span class="text-sm text-gray-600">Page {{ currentPage }} of {{ totalPages }}</span>
+            <button
+              type="button"
+              class="px-3 py-1.5 rounded-md border border-gray-300 text-sm text-gray-700 disabled:opacity-50"
+              [disabled]="currentPage === totalPages"
+              (click)="nextPage()"
+            >
+              Next
+            </button>
+          </div>
+        </div>
       }
     </div>
   </div>

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './layout/main-layout/main-layout';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
       {
         path: 'verify-email',
         loadComponent: () => import('./features/auth/verify-email/verify-email').then((m) => m.VerifyEmail),
+      },
+      {
+        path: 'forgot-password',
+        loadComponent: () => import('./features/auth/forgot-password/forgot-password').then((m) => m.ForgotPassword),
       },
       {
         path: 'add-info',
@@ -50,6 +55,11 @@ export const routes: Routes = [
       {
         path: 'categories/:slug',
         loadComponent: () => import('./features/category/laptop/laptop-category').then((m) => m.LaptopCategory),
+      },
+      {
+        path: 'admin/inventory',
+        canActivate: [adminGuard],
+        loadComponent: () => import('./features/admin/inventory-admin/inventory-admin').then((m) => m.InventoryAdmin),
       },
       
     ],

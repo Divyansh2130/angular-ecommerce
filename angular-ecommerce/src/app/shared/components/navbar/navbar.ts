@@ -1,4 +1,15 @@
-import { Component,signal,inject,ElementRef, ViewChild, HostListener, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  signal,
+  inject,
+  ElementRef,
+  ViewChild,
+  HostListener,
+  Input,
+  OnInit,
+  OnDestroy,
+  computed,
+} from '@angular/core';
 import { CategoryPanel } from '../category-panel/category-panel';
 import { SearchPanel } from '../search-panel/search-panel';
 import { CategoryService } from '../../../core/services/category.service';
@@ -7,6 +18,8 @@ import { Category } from '../../models/category.model';
 import { RouterLink, Router, NavigationStart } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
 import { WishlistService } from '../../../core/services/wishlist.service';
+import { AuthApiService } from '../../../core/services/auth-api.service';
+import { AuthStateService } from '../../../core/services/auth-state.service';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -22,6 +35,8 @@ export class Navbar implements OnInit, OnDestroy {
   private categoryService = inject(CategoryService);
   private cartService = inject(CartService);
   private wishlistService = inject(WishlistService);
+  private authApi = inject(AuthApiService);
+  private authState = inject(AuthStateService);
   private router = inject(Router);
   private routerSub?: Subscription;
   private categoriesSub?: Subscription;
@@ -29,6 +44,16 @@ export class Navbar implements OnInit, OnDestroy {
   categories = signal<Category[]>([]);
   cartItemCount = this.cartService.itemCount;
   wishlistItemCount = this.wishlistService.itemCount;
+  isLoggedIn = computed(() => !!this.authState.authToken());
+  isAdmin = computed(() => this.authState.authUser()?.role === 'admin');
+  displayName = computed(() => {
+    const name = this.authState.authUser()?.name?.trim();
+    if (!name) {
+      return 'Account';
+    }
+
+    return name.split(' ')[0];
+  });
 
   @ViewChild('navbarRoot') navbarRef!: ElementRef;
 
@@ -42,6 +67,7 @@ export class Navbar implements OnInit, OnDestroy {
       .subscribe(() => {
         this.isCategoryOpen.set(false);
         this.isSearchOpen.set(false);
+        this.isProfileMenuOpen.set(false);
       });
   }
 
@@ -52,15 +78,54 @@ export class Navbar implements OnInit, OnDestroy {
 
   isCategoryOpen = signal(false);
   isSearchOpen = signal(false);
+  isProfileMenuOpen = signal(false);
+  isLoggingOut = signal(false);
+  searchQuery = signal('');
 
   toggleCategory() {
     this.isCategoryOpen.update((v) => !v);
     this.isSearchOpen.set(false);
+    this.isProfileMenuOpen.set(false);
   }
 
   openSearch() {
-    this.isSearchOpen.update((v) => !v);
+    this.isSearchOpen.set(true);
     this.isCategoryOpen.set(false);
+    this.isProfileMenuOpen.set(false);
+  }
+
+  closeSearch() {
+    this.isSearchOpen.set(false);
+  }
+
+  toggleProfileMenu() {
+    this.isProfileMenuOpen.update((v) => !v);
+    this.isCategoryOpen.set(false);
+    this.isSearchOpen.set(false);
+  }
+
+  logout() {
+    if (this.isLoggingOut()) {
+      return;
+    }
+
+    this.isLoggingOut.set(true);
+    this.authApi.logout().subscribe({
+      next: () => this.finishLogout(),
+      error: () => this.finishLogout(),
+    });
+  }
+
+  private finishLogout() {
+    this.authState.clearSession();
+    this.isProfileMenuOpen.set(false);
+    this.isLoggingOut.set(false);
+    this.router.navigate(['/auth/login']);
+  }
+
+  onSearchInput(value: string) {
+    this.searchQuery.set(value);
+    this.openSearch();
   }
 
   @HostListener('document:click', ['$event'])
@@ -71,6 +136,7 @@ export class Navbar implements OnInit, OnDestroy {
     if (!clickedInside) {
       this.isCategoryOpen.set(false);
       this.isSearchOpen.set(false);
+      this.isProfileMenuOpen.set(false);
     }
   }
 }

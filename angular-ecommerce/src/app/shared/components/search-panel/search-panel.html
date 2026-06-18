@@ -1,7 +1,51 @@
-<div class="absolute mt-4 w-full bg-white shadow-xl rounded-xl p-6">
-  <ul class="space-y-4 text-gray-700">
-    <li> Laptop</li>
-    <li> Laiser</li>
-    <li> Lamp</li>
-  </ul>
+<div class="absolute mt-3 w-full bg-white shadow-xl rounded-xl p-4 z-50 border border-gray-100">
+  @if (!hasQuery) {
+    <p class="text-sm text-gray-500 px-1">Start typing to search products and categories.</p>
+  } @else if (!hasResults) {
+    <p class="text-sm text-gray-500 px-1">No results found for "{{ query }}".</p>
+  } @else {
+    <div class="space-y-4">
+      @if (categoryMatches.length > 0) {
+        <section>
+          <h3 class="text-xs font-semibold tracking-wide text-gray-400 uppercase mb-2">Categories</h3>
+          <ul class="space-y-1">
+            @for (category of categoryMatches; track category.id) {
+              <li>
+                <a
+                  [routerLink]="['/category', category.slug]"
+                  class="block rounded-md px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+                  (click)="onResultClick()"
+                >
+                  {{ category.name }}
+                </a>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+
+      @if (productMatches.length > 0) {
+        <section>
+          <h3 class="text-xs font-semibold tracking-wide text-gray-400 uppercase mb-2">Products</h3>
+          <ul class="space-y-1">
+            @for (product of productMatches; track product.id) {
+              <li>
+                <a
+                  [routerLink]="['/products', product.id]"
+                  class="flex items-center gap-3 rounded-md px-2 py-2 hover:bg-gray-100"
+                  (click)="onResultClick()"
+                >
+                  <img [src]="product.image" [alt]="product.title" class="h-10 w-10 object-contain rounded bg-gray-50" />
+                  <div class="min-w-0">
+                    <p class="text-sm text-gray-700 truncate">{{ product.title }}</p>
+                    <p class="text-xs text-gray-500">€{{ product.price }}</p>
+                  </div>
+                </a>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    </div>
+  }
 </div>

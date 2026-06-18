@@ -213,6 +213,10 @@
             Continue
           }
         </button>
+
+        @if (apiError()) {
+          <p class="mt-3 text-sm text-red-600">{{ apiError() }}</p>
+        }
       </form>
     }
 
@@ -362,6 +366,10 @@
             Continue
           }
         </button>
+
+        @if (apiError()) {
+          <p class="mt-3 text-sm text-red-600">{{ apiError() }}</p>
+        }
       </form>
     }
 

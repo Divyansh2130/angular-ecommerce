@@ -1,4 +1,4 @@
-import bcryptjs from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../../src/models/user.model.js';
 import { signupService, loginService, logoutService, getUserByIdService } from '../../src/services/user.service.js';
@@ -10,7 +10,7 @@ describe('user service', () => {
 
   it('signupService creates user and returns token', async () => {
     vi.spyOn(User, 'findOne').mockResolvedValue(null as any);
-    vi.spyOn(bcryptjs, 'hash').mockResolvedValue('hashed' as any);
+    vi.spyOn(bcrypt, 'hash').mockResolvedValue('hashed' as any);
     vi.spyOn(jwt, 'sign').mockReturnValue('token' as any);
 
     const save = vi.fn().mockResolvedValue(undefined);
@@ -45,14 +45,14 @@ describe('user service', () => {
 
   it('loginService throws when password invalid', async () => {
     vi.spyOn(User, 'findOne').mockResolvedValue({ isActive: true, password: 'h' } as any);
-    vi.spyOn(bcryptjs, 'compare').mockResolvedValue(false as any);
+    vi.spyOn(bcrypt, 'compare').mockResolvedValue(false as any);
 
     await expect(loginService({ email: 'a@b.com', password: 'pass123' })).rejects.toThrow('Invalid email or password');
   });
 
   it('loginService returns token when valid', async () => {
     vi.spyOn(User, 'findOne').mockResolvedValue({ _id: 'u1', isActive: true, password: 'h', name: 'N', email: 'a@b.com', role: 'user' } as any);
-    vi.spyOn(bcryptjs, 'compare').mockResolvedValue(true as any);
+    vi.spyOn(bcrypt, 'compare').mockResolvedValue(true as any);
     vi.spyOn(jwt, 'sign').mockReturnValue('token' as any);
 
     const result = await loginService({ email: 'a@b.com', password: 'pass123' });

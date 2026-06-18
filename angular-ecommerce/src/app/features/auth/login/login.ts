@@ -2,6 +2,9 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthApiService } from '../../../core/services/auth-api.service';
+import { AuthStateService } from '../../../core/services/auth-state.service';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +16,14 @@ export class Login {
   loginForm: FormGroup;
   showPassword = signal(false);
   isLoading = signal(false);
+  apiError = signal('');
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authApi: AuthApiService,
+    private authState: AuthStateService
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -31,12 +40,19 @@ export class Login {
       return;
     }
 
+    this.apiError.set('');
     this.isLoading.set(true);
-    // Temporary behavior: redirect to home after entering valid credentials.
-    setTimeout(() => {
-      this.isLoading.set(false);
-      this.router.navigate(['/']);
-    }, 600);
+    this.authApi.login(this.loginForm.getRawValue()).subscribe({
+      next: (response) => {
+        this.authState.setSession(response.token, response.user);
+        this.isLoading.set(false);
+        this.router.navigate(['/']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isLoading.set(false);
+        this.apiError.set(error.error?.message || 'Unable to login. Please try again.');
+      },
+    });
   }
 
   onGoogleLogin() {

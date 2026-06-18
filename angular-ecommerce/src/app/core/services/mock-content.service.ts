@@ -7,6 +7,11 @@ import { FAQ } from '../../shared/models/faq.model';
 import { Type } from '../../shared/models/type.model';
 import { FeatureStripItem } from '../../shared/components/feature-strip/feature-strip';
 
+interface BackendContentResponse {
+  success: boolean;
+  content: UiContent;
+}
+
 export interface BrandIcon {
   name?: string;
   icon: string;
@@ -35,6 +40,7 @@ export interface UiContent {
 })
 export class MockContentService {
   private readonly http = inject(HttpClient);
+  private readonly apiUrl = 'http://localhost:5000/api';
   private readonly contentSubject = new BehaviorSubject<UiContent>({
     heroImages: [],
     shopByCategories: [],
@@ -51,9 +57,16 @@ export class MockContentService {
   readonly content$ = this.contentSubject.asObservable();
 
   constructor() {
-    this.http.get<UiContent>('assets/data/ui-content.json').subscribe({
-      next: (content) => this.contentSubject.next(content),
-      error: () => this.contentSubject.next(this.contentSubject.value),
+    this.http.get<BackendContentResponse>(`${this.apiUrl}/content`).subscribe({
+      next: (response) => {
+        this.contentSubject.next(response.content);
+      },
+      error: () => {
+        this.http.get<UiContent>('assets/data/ui-content.json').subscribe({
+          next: (content) => this.contentSubject.next(content),
+          error: () => this.contentSubject.next(this.contentSubject.value),
+        });
+      },
     });
   }
 

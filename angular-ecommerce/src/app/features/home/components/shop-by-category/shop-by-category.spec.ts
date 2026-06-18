@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { ShopByCategory } from './shop-by-category';
 
@@ -8,7 +9,8 @@ describe('ShopByCategory', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShopByCategory]
+      imports: [ShopByCategory],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

@@ -1,5 +1,5 @@
 import User from '../models/user.model.js';
-import bcryptjs from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key_change_in_production';
@@ -33,7 +33,7 @@ export const signupService = async ({ name, email, password, role = 'user' }: Si
   }
 
   // Hash password
-  const hashedPassword = await bcryptjs.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create new user (enforce role to be 'admin' or 'user' only)
   const newUser = new User({
@@ -75,7 +75,7 @@ export const loginService = async ({ email, password }: LoginInput): Promise<Aut
   }
 
   // Verify password
-  const isPasswordValid = await bcryptjs.compare(password, user.password);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
     throw new Error('Invalid email or password');
   }
