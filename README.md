@@ -102,7 +102,7 @@ src/
 
 ### Product Details
 
-![Product Detail Page](docs/images/product-detail.png)
+![Product Detail Page](docs/images/product-details.png)
 
 ### Shopping Cart
 
