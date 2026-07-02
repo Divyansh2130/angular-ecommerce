@@ -1,61 +1,189 @@
-# Capstone Project: TaskFlow – Implement eCommerce Application Using Angular
+# 🛒 Angular E-Commerce
 
-## Project Description:
+A modern e-commerce web application built with **Angular 21** and **TypeScript**. The application provides a responsive shopping experience with product browsing, authentication, cart management, and an admin inventory dashboard.
 
-### Project Setup:
-- **Initialize a new Angular project using Angular CLI.**
-- **Set up the project structure with necessary folders (e.g., components, services, models).**
-- **Install and configure Angular Material for UI components.**
+---
 
-### Home Page:
-- **Develop a home page that displays a list of products.**
-- **Use Angular Material components to create a responsive layout.**
-- **Fetch product data from a mock API or a static JSON file.**
-- **Implement a search bar to filter products by name.**
-- **Add a navigation bar with links to other pages (e.g., Product Detail, Shopping Cart).**
-- **Ensure the home page is visually appealing and user-friendly.**
+## 🚀 Live Demo
 
-### Product Listing:
-- **Create a product listing component to display products in a grid or list view.**
-- **Implement pagination to handle large sets of products.**
-- **Add sorting functionality to sort products by price, name, or rating.**
+> https://angular-capstone.vercel.app/
 
-### Product Detail Page:
-- **Develop a product detail page that shows detailed information about a selected product.**
-- **Include product images, description, price, and reviews.**
-- **Implement a feature to add the product to the shopping cart.**
+---
 
-### Shopping Cart:
-- **Create a shopping cart component to manage products added by the user.**
-- **Display the list of products in the cart with the ability to update quantities or remove items.**
-- **Calculate and display the total price of the items in the cart.**
+## 📖 Overview
 
-### User Authentication:
-- **Implement user authentication using Angular services.**
-- **Create login and registration components.**
-- **Use JWT (JSON Web Tokens) for secure authentication and authorization.**
+This project was developed as an end-to-end Angular application demonstrating modern frontend development practices, including standalone components, lazy loading, state management, routing, and responsive UI design.
 
-### Checkout Process:
-- **Develop a checkout component to handle the purchase process.**
-- **Include forms for shipping information and payment details.**
-- **Validate user input and display appropriate error messages.**
+The application allows users to browse products, search and filter items, manage their shopping cart, authenticate securely, and access admin functionality for inventory management.
 
-### Order Confirmation:
-- **Create an order confirmation page that displays order details after a successful purchase.**
-- **Show a summary of the order, including products, shipping information, and total cost.**
-- **Provide an option to print or email the order confirmation.**
+---
 
-### Admin Dashboard:
-- **Develop an admin dashboard for managing products, orders, and users.**
-- **Implement CRUD (Create, Read, Update, Delete) operations for products.**
-- **Display a list of orders with the ability to update order status.**
+## ✨ Features
 
-### Unit Testing:
-- **Write unit tests for components, services, and other parts of the application.**
-- **Use Angular's testing utilities and frameworks like Jasmine and Karma.**
-- **Ensure that all tests pass and the application behaves as expected.**
+### 👤 Authentication
+- User Registration
+- User Login
+- Forgot Password
+- Email Verification
+- JWT-based Authentication
 
-**Instructions**: 
-* Set up basic `Angular app with TypeScript` from scratch using `npx -p @angular/cli ng new temp && mv temp/* . && mv temp/.[^.]* . && rm -rf temp` command
-* Have proper `State handling`
-* Have proper `Event Handling` for respective events
+### 🛍️ Shopping
+- Product Listing
+- Product Details
+- Search Products
+- Product Categories
+- Wishlist
+- Shopping Cart
+- Quantity Management
+
+### 📦 Product Management
+- Pagination
+- Sorting
+- Product Filtering
+- Responsive Product Grid
+
+### 👨‍💼 Admin
+- Inventory Dashboard
+- Add Products
+- Update Products
+- Delete Products
+
+### ⚡ Performance
+- Lazy Loaded Routes
+- Standalone Components
+- Optimized Angular Build
+- Responsive Design
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Angular 21
+- TypeScript
+- RxJS
+- Angular Router
+- Angular Signals
+- HTML5
+- CSS3
+
+### Tools
+- Angular CLI
+- npm
+- Git
+- GitHub
+- Vercel
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+├── app/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── models/
+│   ├── guards/
+│   ├── interceptors/
+│   └── shared/
+├── public/
+└── assets/
+```
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+
+![Home Page](docs/images/home.png)
+
+### Product Details
+
+![Product Detail Page](docs/images/product-detail.png)
+
+### Shopping Cart
+
+![Shopping Cart Page](docs/images/cart-page.png)
+
+### Login/Register
+
+![Login Page](docs/images/login.png)
+
+![Register Page](docs/images/register.png)
+
+### Product Page
+
+![Product Page](docs/images/product-page.png)
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Divyansh2130/angular-ecommerce.git
+```
+
+Navigate into the project
+
+```bash
+cd angular-ecommerce
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
+
+```bash
+ng serve
+```
+
+Open
+
+```
+http://localhost:4200
+```
+
+---
+
+## 📦 Production Build
+
+```bash
+ng build
+```
+
+---
+
+## 🔮 Future Improvements
+
+- Payment Gateway Integration
+- Order History
+- Product Reviews
+- User Profile
+- Dark Mode
+- Wishlist Synchronization
+- Recommendation Engine
+
+---
+
+## 👨‍💻 Author
+
+**Divyansh Doshi**
+
+GitHub: https://github.com/Divyansh2130
+
+LinkedIn: https://www.linkedin.com/in/divyansh-doshi-39785a23b/
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
